@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ca2d9394-eb32-454e-a5fa-60b82f2be442}">
+		<property name="assetPath">
+			<value>emote_surprise.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.1494375000000003</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ba5b55ab-40b4-4507-b426-e4e5431372d7}</destination>
+		</relationship>
+	</object>
+</objects>

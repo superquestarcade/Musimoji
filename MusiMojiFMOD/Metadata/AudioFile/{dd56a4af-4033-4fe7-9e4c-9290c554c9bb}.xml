@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{dd56a4af-4033-4fe7-9e4c-9290c554c9bb}">
+		<property name="assetPath">
+			<value>drum_fear.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>10.970020833333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ba5b55ab-40b4-4507-b426-e4e5431372d7}</destination>
+		</relationship>
+	</object>
+</objects>

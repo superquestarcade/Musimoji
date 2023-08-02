@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{12886d02-0bca-44e2-8930-f1c4a25f177e}">
+		<property name="assetPath">
+			<value>drum_sadness.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>10</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ba5b55ab-40b4-4507-b426-e4e5431372d7}</destination>
+		</relationship>
+	</object>
+</objects>

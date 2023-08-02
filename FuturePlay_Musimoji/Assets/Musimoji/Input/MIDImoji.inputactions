@@ -1,0 +1,78 @@
+{
+    "name": "MIDImoji",
+    "maps": [
+        {
+            "name": "MIDI",
+            "id": "5c273301-3fe3-4557-97b0-c62941107df9",
+            "actions": [
+                {
+                    "name": "MIDI_C",
+                    "type": "Button",
+                    "id": "7e10ffec-257e-4606-9f8a-639257c89710",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ee5a64d3-ee2f-4277-8416-ab4a55be58c5",
+                    "path": "<MidiDevice>/note000",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MIDI_C",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05c74514-881b-4ec3-ad1b-e1f6b011ca56",
+                    "path": "<MidiDevice>/note012",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MIDI_C",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9fad21c-d23b-4301-a183-994d4b15a57c",
+                    "path": "<MidiDevice>/note024",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MIDI_C",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1c254f2-f626-4295-b874-e459e3ec82ee",
+                    "path": "<MidiDevice>/note036",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MIDI_C",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93a0aa2b-6a17-4007-9c78-1fbd60bf2d3e",
+                    "path": "<MidiDevice>/note048",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MIDI_C",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

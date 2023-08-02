@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{d3ee6438-8880-4d0b-afc1-4d839d4ea089}">
+		<property name="name">
+			<value>AttractMode</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d5fe5ad0-a065-4dad-be38-36cb930e6e37}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{abad3bac-691c-4c8d-9ad1-63cea811bee3}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{abad3bac-691c-4c8d-9ad1-63cea811bee3}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.22999998927116394</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
