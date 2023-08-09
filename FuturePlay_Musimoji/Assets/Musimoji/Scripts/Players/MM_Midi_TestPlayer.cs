@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Musimoji.Scripts
+namespace Musimoji
 {
     public class MM_Midi_TestPlayer : MonoBehaviourPlus
     {

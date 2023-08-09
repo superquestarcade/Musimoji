@@ -1,3 +1,4 @@
+using Musimoji;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,5 +56,19 @@ public class MusimojiInput : MonoBehaviourPlus
         }
     }
 
+    #endregion
+    
+    #region MIDI Input
+
+    public void OnMidiNoteDown(Note note, float velocity)
+    {
+        
+    }
+
+    public void OnMidiNoteUp(Note note)
+    {
+        
+    }
+    
     #endregion
 }

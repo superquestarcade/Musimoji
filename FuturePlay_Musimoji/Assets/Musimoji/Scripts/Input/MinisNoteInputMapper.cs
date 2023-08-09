@@ -4,7 +4,7 @@ using Minis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Musimoji.Scripts
+namespace Musimoji
 {
     public class MinisNoteInputMapper : MonoBehaviourPlus
     {
@@ -57,9 +57,10 @@ namespace Musimoji.Scripts
         private void OnAddMidiDevice(MidiDevice midiDevice)
         {
             if(DebugMessages)Debug.Log(string.Format(
-                "Adding device ch:{0} player: {1} dev:'{2}'",
+                // "Adding device ch:{0} player: {1} dev:'{2}'",
+                "Adding device ch:{0} dev:'{1}'",
                 midiDevice.channel,
-                DeviceChannelToPlayerId(midiDevice.channel),
+                // DeviceChannelToPlayerId(midiDevice.channel),
                 midiDevice.description.product
             ));
             midiDevice.onWillNoteOn += OnWillNoteOn;
@@ -71,9 +72,10 @@ namespace Musimoji.Scripts
         private void OnRemoveMidiDevice(MidiDevice midiDevice)
         {
             if(DebugMessages)Debug.Log(string.Format(
-                "Removing device ch:{0} player: {1} dev:'{2}'",
+                // "Removing device ch:{0} player: {1} dev:'{2}'",
+                "Removing device ch:{0} dev:'{1}'",
                 midiDevice.channel,
-                DeviceChannelToPlayerId(midiDevice.channel),
+                // DeviceChannelToPlayerId(midiDevice.channel),
                 midiDevice.description.product
             ));
             midiDevice.onWillNoteOn -= OnWillNoteOn;
@@ -110,22 +112,23 @@ namespace Musimoji.Scripts
                 return;
             }
             channel = midiDevice.channel;
-            var playerId = DeviceChannelToPlayerId(channel);
+            // var playerId = DeviceChannelToPlayerId(channel);
             // Note that you can't use note.velocity because the state
             // hasn't been updated yet (as this is "will" event). The note
             // object is only useful to specify the target note (note
             // number, channel number, device name, etc.) Use the velocity
             // argument as an input note velocity.
             if(DebugMessages)Debug.Log(string.Format(
-                "Note On #{0} ({1}) vel:{2:0.00} ch:{3} player: {4} dev:'{5}'",
+                // "Note On #{0} ({1}) vel:{2:0.00} ch:{3} player: {4} dev:'{5}'",
+                "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}'",
                 note.noteNumber,
                 note.shortDisplayName,
                 velocity,
                 channel,
-                playerId,
+                // playerId,
                 note.device.description.product
             ));
-            OnNoteDown?.Invoke(playerId, (Note)note.noteNumber, velocity);
+            OnNoteDown?.Invoke(channel, (Note)note.noteNumber, velocity);
         }
 
         private void OnWillNoteOff(MidiNoteControl note)
@@ -136,16 +139,17 @@ namespace Musimoji.Scripts
                 return;
             }
             channel = midiDevice.channel;
-            var playerId = DeviceChannelToPlayerId(channel);
+            // var playerId = DeviceChannelToPlayerId(channel);
             if(DebugMessages)Debug.Log(string.Format(
-                "Note Off #{0} ({1}) ch:{2} player:{3} dev:'{4}'",
+                // "Note Off #{0} ({1}) ch:{2} player:{3} dev:'{4}'",
+                "Note Off #{0} ({1}) ch:{2} dev:'{3}'",
                 note.noteNumber,
                 note.shortDisplayName,
                 channel,
-                playerId,
+                // playerId,
                 note.device.description.product
             ));
-            OnNoteUp?.Invoke(playerId, (Note)note.noteNumber);
+            OnNoteUp?.Invoke(channel, (Note)note.noteNumber);
         }
     }
 }
