@@ -43,14 +43,12 @@ public class MusimojiManager : MonoBehaviourPlus
     
     // Arduino LED Control
     [SerializeField] private bool arduinoLedControlEnabled = true;
-    
+
     public UnityEvent<int> OnWin;
     public UnityEvent<float> OnWinIntensity;
-    
     public UnityEvent OnStartGame;
-
     public UnityEvent OnEndGame;
-
+    
     #endregion
 
     #region Unity Functions
@@ -137,13 +135,10 @@ public class MusimojiManager : MonoBehaviourPlus
     public void PlayerFireEmoji(int playerID, int emojiId)
     {
         var playerStepIndex = PlayerStepIndex(playerID);
-
         if (currentSequenceData[playerStepIndex] == emojiId) return;
-        
-        sequenceStepDisplays[playerStepIndex].SetEmoji(emojiId);
-        currentSequenceData[playerStepIndex] = emojiId;
-        if(DebugMessages) Debug.Log($"MusimojiManager.PlayerFireEmoji player {playerID}, emoji {emojiId}, slot {playerStepIndex}");
-
+        SetSequenceStep(playerStepIndex, emojiId);
+        if(DebugMessages) Debug.Log($"MusimojiManager.PlayerFireEmoji player {playerID}, " +
+                                    $"emoji {emojiId}, slot {playerStepIndex}");
         SetAudioSequenceData();
         CheckWinCondition(playerStepIndex, SetWinningRun);
     }
@@ -151,13 +146,11 @@ public class MusimojiManager : MonoBehaviourPlus
     public bool PredictWinningShot(int playerIndex, int emojiId, float fireDuration)
     {
         var playerCurrentStep = PlayerStepIndex(playerIndex);
-        
         var playerStepPredicted = PlayerStepPrediction(playerIndex, fireDuration);
-        
         var isWinningShot = PredictWinCondition(playerStepPredicted, emojiId);
-        
-        if(DebugMessages) Debug.Log($"MusimojiManager.PredictWinningShot player {playerIndex} at step {playerCurrentStep} predicted step {playerStepPredicted} is winning shot {isWinningShot}");
-
+        if(DebugMessages) Debug.Log($"MusimojiManager.PredictWinningShot player {playerIndex} " +
+                                    $"at step {playerCurrentStep} predicted step {playerStepPredicted} " +
+                                    $"is winning shot {isWinningShot}");
         return isWinningShot;
     }
     
@@ -190,17 +183,20 @@ public class MusimojiManager : MonoBehaviourPlus
     private int PlayerStepPrediction(int playerIndex, float time)
     {
         var returnStep = PlayerStepIndex(playerIndex);
-
         var stepsIntoFuture = Mathf.RoundToInt(time / sequencer.StepDuration);
-
         returnStep += stepsIntoFuture;
-
         return returnStep;
     }
 
     #endregion
 
     #region Sequence
+
+    private void SetSequenceStep(int step, int emojiId)
+    {
+        sequenceStepDisplays[step].SetEmoji(emojiId);
+        currentSequenceData[step] = emojiId;
+    }
 
     private void SetAudioSequenceData()
     {
@@ -262,6 +258,45 @@ public class MusimojiManager : MonoBehaviourPlus
         PlayerControlActive = true;
     }
 
+    #endregion
+    
+    #region Pods
+
+    public int[] GetPodSequenceValues(int podCount)
+    {
+        if (currentSequenceData.Length < podCount)
+        {
+            Debug.LogWarning($"MM_Manager.GetPodSequenceValues podCount ({podCount}) " +
+                             $"not enough sequenceData ({currentSequenceData.Length})");
+            return null;
+        }
+        var returnValues = new List<int>();
+        for (var p = 0; p < podCount; p++)
+        {
+            var podStepIndex = PodStepIndex(p, podCount);
+            if (currentSequenceData.Length < podStepIndex)
+            {
+                Debug.LogWarning($"MM_Manager.GetPodSequenceValues podStepIndex ({podStepIndex}) " +
+                                 $"not enough sequenceData ({currentSequenceData.Length})");
+                return null;
+            }
+            returnValues.Add(currentSequenceData[podStepIndex]);
+        }
+
+        return returnValues.ToArray();
+    }
+    
+    private int PodStepIndex(int podIndex, int podCount)
+    {
+        var returnIndex = currentStep;
+        double sequenceTimePoint;
+        var podPoint = podIndex / podCount;
+        
+        sequenceTimePoint = sequencer.SequenceDuration / podPoint;
+        returnIndex += Mathf.FloorToInt((float)sequenceTimePoint / sequencer.StepDuration);
+        return returnIndex;
+    }
+    
     #endregion
 
     #region Winning

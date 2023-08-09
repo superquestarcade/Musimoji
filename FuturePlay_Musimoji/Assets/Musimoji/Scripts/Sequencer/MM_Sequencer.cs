@@ -5,33 +5,21 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MM_Sequencer : MonoBehaviour
+public class MM_Sequencer : MonoBehaviourPlus
 {
-    public bool debugMessages = false;
-    
     private bool isPlaying = false;
-
     public bool playOnStart = true;
-
     public int bpm;
     [SerializeField] private int sequenceStepCount = 16;
-
     private int currentStep;
     public int SequenceStepCount => sequenceStepCount;
-    
     public float StepDuration => (float) bpm/60/4;
     public float SequenceDuration => StepDuration * sequenceStepCount;
-
     [SerializeField] private float stepTimer, sequenceTimer;
-
     public float SequenceTimer => sequenceTimer;
-
     private int[] sequenceData;
-
     public int SequencerCount => sequenceData.Length;
-
     public UnityEvent<int, int> OnAnyStep;
-
     public UnityEvent<int[]> OnSetSequenceData;
 
     // Start is called before the first frame update
@@ -54,7 +42,7 @@ public class MM_Sequencer : MonoBehaviour
 
         if (stepTimer < StepDuration) return;
         
-        if(debugMessages) Debug.Log("MM_Sequencer.StepTick");
+        if(DebugMessages) Debug.Log("MM_Sequencer.StepTick");
         CalculateNextStep();
         OnAnyStep?.Invoke(currentStep, sequenceData[currentStep-1]);
     }
@@ -73,19 +61,19 @@ public class MM_Sequencer : MonoBehaviour
     public void StartPlaying()
     {
         if (isPlaying) return;
-        if(debugMessages) Debug.Log("MM_Sequencer.StartPlaying");
+        if(DebugMessages) Debug.Log("MM_Sequencer.StartPlaying");
         isPlaying = true;
     }
 
     public void StopPlaying()
     {
-        if(debugMessages) Debug.Log("MM_Sequencer.StopPlaying");
+        if(DebugMessages) Debug.Log("MM_Sequencer.StopPlaying");
         isPlaying = false;
     }
 
     public void Restart()
     {
-        if(debugMessages) Debug.Log("MM_Sequencer.Restart");
+        if(DebugMessages) Debug.Log("MM_Sequencer.Restart");
         StopPlaying();
         currentStep = 0;
         sequenceTimer = 0;
@@ -94,20 +82,20 @@ public class MM_Sequencer : MonoBehaviour
 
     public void SetBpm(int bpm)
     {
-        if(debugMessages) Debug.Log($"MM_Sequencer.SetBpm {bpm}");
+        if(DebugMessages) Debug.Log($"MM_Sequencer.SetBpm {bpm}");
         this.bpm = bpm;
     }
 
     public void SetSequence(int[] sequence)
     {
-        if(debugMessages) Debug.Log("MM_Sequencer.SetSequence");
+        if(DebugMessages) Debug.Log("MM_Sequencer.SetSequence");
         this.sequenceData = sequence;
         OnSetSequenceData?.Invoke(this.sequenceData);
     }
 
     public void SetStep(int step, int value)
     {
-        if(debugMessages) Debug.Log($"MM_Sequencer.SetStep {step} value {value}");
+        if(DebugMessages) Debug.Log($"MM_Sequencer.SetStep {step} value {value}");
         sequenceData[step] = value;
     }
 

@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MusimojiSequenceStepDisplay : MonoBehaviour
+public class MusimojiSequenceStepDisplay : MonoBehaviourPlus
 {
-    public bool debugMessages = false;
-
     public int EmojiID { get; private set; } = 0;
 
     public Sprite[] emojiSprites;
@@ -22,6 +20,7 @@ public class MusimojiSequenceStepDisplay : MonoBehaviour
     [SerializeField] private Canvas stepNumberCanvas;
     [SerializeField] private TMP_Text debugStepNumberText;
 
+    [SerializeField] private bool vfxActive = true;
     [SerializeField] private MM_EmojiVfx hitVfx;
 
     private void Update()
@@ -52,7 +51,7 @@ public class MusimojiSequenceStepDisplay : MonoBehaviour
     /// <param name="value">0 = empty</param>
     public void SetEmoji(int value)
     {
-        if(debugMessages) Debug.Log($"MusimojiSequenceStepDisplay.SetEmoji ({value})");
+        if(DebugMessages) Debug.Log($"MusimojiSequenceStepDisplay.SetEmoji ({value})");
         
         if (value < 0 || value > emojiSprites.Length)
         {
@@ -80,7 +79,7 @@ public class MusimojiSequenceStepDisplay : MonoBehaviour
         hitSlotDisplayBg.enabled = true;
         hitSlotDisplayFg.enabled = true;
         
-        if(hitVfx!=null) hitVfx.TriggerGroup(colorIndex);
+        if(vfxActive && hitVfx!=null) hitVfx.TriggerGroup(colorIndex);
         
         yield return new WaitForSeconds(duration);
         hitSlotDisplayBg.enabled = false;
