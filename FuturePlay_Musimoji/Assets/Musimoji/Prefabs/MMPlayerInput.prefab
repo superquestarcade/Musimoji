@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865607222114503449}
   - component: {fileID: 7013023717099163465}
-  - component: {fileID: 86331822058561277}
+  - component: {fileID: 5625534874988953114}
   - component: {fileID: 418681033953949325}
   m_Layer: 0
   m_Name: MMPlayerInput
@@ -56,6 +56,7 @@ MonoBehaviour:
   repressBeamFireAgainDelay: 2
   destroyFiredEmojiDelay: 0.5
   fireAgainDelay: 1.5
+  emojiRefs: []
   playerID: 1
   emojiDisplay: {fileID: 0}
   emptyEmoji: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
@@ -90,7 +91,7 @@ MonoBehaviour:
   EmojiChangeEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &86331822058561277
+--- !u!114 &5625534874988953114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9ba0a9e9e3bd6459dedea8d3168b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugLevel: 3
+  DebugLevel: 0
   player: {fileID: 7013023717099163465}
 --- !u!114 &418681033953949325
 MonoBehaviour:
@@ -192,7 +193,7 @@ MonoBehaviour:
     m_ActionName: Player1/MousePosition[/Mouse/position]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 86331822058561277}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusimojiInput, Assembly-CSharp
         m_MethodName: OnButton1
         m_Mode: 0
@@ -208,7 +209,7 @@ MonoBehaviour:
     m_ActionName: Player1/Button1[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 86331822058561277}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusimojiInput, Assembly-CSharp
         m_MethodName: OnButton2
         m_Mode: 0
@@ -224,7 +225,7 @@ MonoBehaviour:
     m_ActionName: Player1/Button2[/Keyboard/q]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 86331822058561277}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusimojiInput, Assembly-CSharp
         m_MethodName: OnButton3
         m_Mode: 0

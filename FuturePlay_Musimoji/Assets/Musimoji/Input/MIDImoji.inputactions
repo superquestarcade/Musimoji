@@ -6,9 +6,81 @@
             "id": "5c273301-3fe3-4557-97b0-c62941107df9",
             "actions": [
                 {
-                    "name": "MIDI_C",
+                    "name": "Player1 Button1",
                     "type": "Button",
-                    "id": "7e10ffec-257e-4606-9f8a-639257c89710",
+                    "id": "182ebbeb-bc38-4887-bcd8-0f46cadfac54",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player1 Button2",
+                    "type": "Button",
+                    "id": "f74985b3-3368-4ebe-b8c2-411ff4254c99",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player1 Button3",
+                    "type": "Button",
+                    "id": "c7afd4b6-d542-4bc9-825b-96d59da44d41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player2 Button1",
+                    "type": "Button",
+                    "id": "d2efab87-657f-45ba-8c52-a7f77e9b4b59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player2 Button2",
+                    "type": "Button",
+                    "id": "93eaa09c-098e-4697-883d-13cfe5245456",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player2 Button3",
+                    "type": "Button",
+                    "id": "ecf6f3d5-c81f-4eef-8cf8-6d51242d3950",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player3 Button1",
+                    "type": "Button",
+                    "id": "f0c79e48-4bca-4080-a6b6-bc10293f95cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player3 Button2",
+                    "type": "Button",
+                    "id": "810d4220-c74c-4de4-b35f-cca967032741",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player3 Button3",
+                    "type": "Button",
+                    "id": "3fe252eb-0b79-4846-9227-1c973ee5010f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,56 +90,100 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "ee5a64d3-ee2f-4277-8416-ab4a55be58c5",
-                    "path": "<MidiDevice>/note000",
+                    "id": "ed2dc0eb-1526-461e-bbab-0b83a9b2a189",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MIDI_C",
+                    "action": "Player1 Button1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "05c74514-881b-4ec3-ad1b-e1f6b011ca56",
-                    "path": "<MidiDevice>/note012",
+                    "id": "d901e837-db07-4151-b794-39664969c84c",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MIDI_C",
+                    "action": "Player2 Button1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a9fad21c-d23b-4301-a183-994d4b15a57c",
-                    "path": "<MidiDevice>/note024",
+                    "id": "c12b116e-492a-4fee-915e-0c3763484008",
+                    "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MIDI_C",
+                    "action": "Player2 Button2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b1c254f2-f626-4295-b874-e459e3ec82ee",
-                    "path": "<MidiDevice>/note036",
+                    "id": "b5690b84-02bf-49e1-b213-5054c6f8744e",
+                    "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MIDI_C",
+                    "action": "Player2 Button3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "93a0aa2b-6a17-4007-9c78-1fbd60bf2d3e",
-                    "path": "<MidiDevice>/note048",
+                    "id": "90def77e-3c5f-4ec2-8eca-f3fbad0020b5",
+                    "path": "<Keyboard>/n",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MIDI_C",
+                    "action": "Player3 Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df3a46c1-02bb-4c36-b98f-d1699b34f197",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player3 Button2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5306aaa5-b392-4732-913e-b428611fdf90",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player3 Button1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "52dba5bd-7bd3-4e20-aea2-90523156bafe",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player1 Button2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9b4471f-dd6f-4b80-83f1-20193e0f7776",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player1 Button3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Musimoji;
 using Musimoji.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,14 +9,16 @@ using UnityEngine.InputSystem;
 
 public class MusimojiPlayer : MonoBehaviourPlus
 {
+    [Header("Settings")]
     public MusimojiManager manager;
     public GameObject emojiFireObject;
     [SerializeField] private List<GameObject> firedObjects = new List<GameObject>();
     private bool canFire = true, canRepress = true;
     public float repressBeamDestroyDelay = 0.2f, repressBeamActiveDuration = 2f, repressBeamFireAgainDelay = 5f;
     public float destroyFiredEmojiDelay = 1f, fireAgainDelay = 3.5f;
+    [SerializeField] private EmojiRefs_SO emojiRefs;
     
-    // Emojis
+    [Header("Emojis")]
     public int playerID;
     public int selectedEmoji { get; private set; } = 1;
 
@@ -26,10 +29,10 @@ public class MusimojiPlayer : MonoBehaviourPlus
     public MM_PlayerBackground playerBackground;
     [SerializeField] private Color playerBgColourMultiplier = Color.white;
     
-    // Repress beam
+    [Header("Repress beam")]
     public GameObject repressBeam;
     
-    // Human/ Bot control
+    [Header("Human/ Bot control")]
     [SerializeField] private bool isHuman = true;
     public bool IsHuman => isHuman;
     
@@ -39,12 +42,11 @@ public class MusimojiPlayer : MonoBehaviourPlus
     [SerializeField] private float botActiveTimer = 0;
 
     public UnityEvent EmojiExpressEvent, EmojiRepressEvent, EmojiHitEvent, EmojiReloadEvent;
-
     public UnityEvent<int> EmojiChangeEvent;
 
     private void Start()
     {
-        SetEmoji();
+        UpdateEmojiDisplay();
     }
 
     private void Update()
@@ -58,7 +60,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     {
         if (isHuman) return;
         
-        SetEmoji();
+        UpdateEmojiDisplay();
         StartCoroutine(StartActiveDelay());
         isHuman = true;
         OnSetHuman?.Invoke(isHuman);
@@ -68,7 +70,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     private void InitializeBot()
     {
         isHuman = false;
-        SetEmoji();
+        UpdateEmojiDisplay();
         OnSetHuman?.Invoke(isHuman);
         ResetBotTimer();
     }
@@ -153,14 +155,48 @@ public class MusimojiPlayer : MonoBehaviourPlus
         if (selectedEmoji <= 0) selectedEmoji = emojiSprites.Length;
         if (selectedEmoji > emojiSprites.Length) selectedEmoji = 1;
         if(DebugMessages) Debug.Log($"NextEmoji Player {playerID}: Selecting emoji {selectedEmoji}");
-        SetEmoji();
+        UpdateEmojiDisplay();
         EmojiChangeEvent?.Invoke(selectedEmoji);
     }
 
-    public void SetEmoji()
+    /// <summary>
+    /// Set the current emoji & update for this player
+    /// </summary>
+    /// <param name="value">Emoji type (not index) starts at 1</param>
+    public void SetEmoji(int value)
+    {
+        if (value <= 0 || value > emojiSprites.Length)
+        {
+            Debug.LogError($"MM_Player.SetEmoji no sprite available for this emoji index. Abort! ({value})");
+            return;
+        }
+
+        selectedEmoji = value;
+        UpdateEmojiDisplay();
+    }
+
+    public void SetEmoji(Note note, float velocity)
+    {
+        UpdateEmojiDisplay(emojiRefs.GetIndex(note));
+    }
+
+    private void UpdateEmojiDisplay()
     {
         if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {selectedEmoji}");
         if(emojiDisplay!=null) emojiDisplay.sprite = emojiSprites[selectedEmoji - 1];
+
+        if (playerBackground != null)
+        {
+            var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];
+            playerBackground.SetBgColor(bgColour);
+        }
+    }
+
+    private void UpdateEmojiDisplay(int emojiType)
+    {
+        if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {emojiType}");
+        selectedEmoji = emojiType;
+        if (emojiDisplay != null) emojiDisplay.sprite = emojiRefs.GetSprite(selectedEmoji);
 
         if (playerBackground != null)
         {
