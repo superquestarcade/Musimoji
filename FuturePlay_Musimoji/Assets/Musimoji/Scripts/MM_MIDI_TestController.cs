@@ -3,73 +3,40 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Musimoji.Scripts;
+using UnityEngine.Serialization;
 
 public class MM_MIDI_TestController : MonoBehaviourPlus
 {
     [SerializeField] private MinisNoteInputMapper inputMapper;
-    [SerializeField] private Image emojiImageContainer;
-    private ImageSizeTween imageSizeTween;
-    [SerializeField] private EmojiNoteMap[] emojiRefs;
-    
-
-    private int currentEmoji;
-
-    private void Start()
-    {
-        imageSizeTween = emojiImageContainer.GetComponent<ImageSizeTween>();
-    }
+    [SerializeField] private MM_Midi_TestPlayer[] players;
 
     private void OnEnable()
     {
-        inputMapper.OnNoteDown += SetEmoji;
+        inputMapper.OnNoteDown += SetPlayerEmoji;
     }
 
     private void OnDisable()
     {
-        inputMapper.OnNoteDown -= SetEmoji;
+        inputMapper.OnNoteDown -= SetPlayerEmoji;
     }
 
-    private void SetEmoji(Note value, float velocity = 0.5f)
+    private void SetPlayerEmoji(int playerId, Note note, float velocity)
     {
-        if (!GetEmojiFromNote(value, out var s))
-        {
-            Debug.LogError($"MM_MIDI_TestController.SetEmoji no sprite found ({value})");
-            return;
-        }
-        try
-        {
-            emojiImageContainer.sprite = s;
-        }
-        catch
-        {
-            Debug.LogError($"MM_MIDI_TestController.SetEmoji no sprite found ({value})");
-        }
-        imageSizeTween.TweenStart(velocity, 1f);
+        if (players == null || players.Length <= playerId) return;
+        players[playerId].SetEmoji(note, velocity);
     }
-
-    private bool GetEmojiFromNote(Note note, out Sprite sprite)
-    {
-        foreach (var emojiMap in emojiRefs)
-        {
-            if (emojiMap.notes.Contains(note))
-            {
-                sprite = emojiMap.emojiSprite;
-                return true;
-            }
-        }
-
-        sprite = null;
-        return false;
-    }
-
-    
 }
 
 [Serializable]
-public struct EmojiNoteMap
+public class EmojiNoteMap
 {
-    public Note[] notes;
+    public NoteGroup_SO noteGroup;
     public Sprite emojiSprite;
+
+    public bool Contains(Note note)
+    {
+        return noteGroup.Contains(note);
+    }
 }
 
 [Serializable]
