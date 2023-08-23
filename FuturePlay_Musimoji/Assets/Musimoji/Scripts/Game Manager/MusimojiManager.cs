@@ -200,14 +200,18 @@ public class MusimojiManager : MonoBehaviourPlus
         return returnStep;
     }
 
+    #endregion
+    
+    #region Repress
+    
     public void PlayerRepress(int playerId, int repressStepCount)
     {
         if (DebugLevel>DebugMessageLevel.MINIMAL)
             Debug.Log($"MM_Manager.PlayerRepress ({playerId}) currentStep {currentStep}");
         repressList.Add(new Vector3Int(currentStep, playerId, repressStepCount));
         var repressSequenceData = currentSequenceData[PlayerStepIndex(playerId)];
-        PlayerFireEmoji(playerId, 0);
         OnRepressEmoji?.Invoke(repressSequenceData);
+        PlayerFireEmoji(playerId, 0);
     }
 
     private void CheckRepressRequests()
@@ -246,7 +250,7 @@ public class MusimojiManager : MonoBehaviourPlus
         }
         repressList = updatedRepressRequests;
     }
-
+    
     #endregion
 
     #region Sequence

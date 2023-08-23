@@ -32,6 +32,10 @@ public class MusimojiPlayer : MonoBehaviourPlus
 
     public MM_PlayerBackground playerBackground;
     [SerializeField] private Color playerBgColourMultiplier = Color.white;
+    [SerializeField] private int scrambleEmojiCycles = 6;
+    [SerializeField] private float scrambleCycleDuration = 2f;
+    private int emojiScrambleCount = 0;
+    private List<int> emojiScrambleList;
     
     [Header("Repress beam")]
     public GameObject repressBeam;
@@ -200,7 +204,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     /// Set the current emoji & update for this player
     /// </summary>
     /// <param name="value">Emoji type (not index) starts at 1</param>
-    public void SetEmoji(int value)
+    private void SetEmoji(int value)
     {
         if (value < 0 || value > emojiSprites.Length)
         {
@@ -243,6 +247,33 @@ public class MusimojiPlayer : MonoBehaviourPlus
         var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];
         playerBackground.SetBgColor(bgColour);
     }
+
+    private void CycleToRandomEmoji()
+    {
+        emojiScrambleCount = 0;
+        emojiScrambleList = new List<int>();
+        for (var i = 1; i <= emojiSprites.Length; i++) emojiScrambleList.Add(i);
+        var delay = scrambleCycleDuration / scrambleEmojiCycles;
+        StartCoroutine(SelectRandomEmojiDelay(emojiScrambleList.ToArray(), delay, NextScrambleEmoji));
+    }
+
+    private void NextScrambleEmoji(int previousEmojiValue)
+    {
+        if (emojiScrambleCount >= scrambleEmojiCycles) return;
+        emojiScrambleList.Remove(previousEmojiValue);
+        var delay = scrambleCycleDuration / scrambleEmojiCycles;
+        StartCoroutine(SelectRandomEmojiDelay(emojiScrambleList.ToArray(), delay, NextScrambleEmoji));
+    }
+
+    private IEnumerator SelectRandomEmojiDelay(int[] emojiValues, float delay, Action<int> callback)
+    {
+        emojiScrambleCount++;
+        var emojiValue = emojiValues[Random.Range(0, emojiValues.Length)];
+        SetEmoji(emojiValue);
+        yield return new WaitForSeconds(delay);
+        callback?.Invoke(emojiValue);
+        yield return null;
+    }
     
     #endregion
     
@@ -277,7 +308,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     {
         if (selectedEmoji != emojiId) return;
         if(DebugMessages) Debug.Log($"MM_Player.OnRepressEmoji selectedEmoji {selectedEmoji}");
-        SetEmoji(0);
+        CycleToRandomEmoji();
     }
     
     #endregion

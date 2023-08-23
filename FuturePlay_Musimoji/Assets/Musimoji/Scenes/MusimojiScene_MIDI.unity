@@ -14986,7 +14986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9088251dcb3470743803688c77d1b8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugLevel: 0
+  DebugLevel: 3
   manager: {fileID: 1020714967}
   mmFmodManager: {fileID: 7777836843469874670}
   emojiFireObject: {fileID: 6401195957948078499, guid: 531ae79f6bd9ec14ab7ed7c76e4ad03b,
@@ -15022,6 +15022,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4400f72feaedb984fafcdd3a929a329b, type: 3}
   playerBackground: {fileID: 688567507}
   playerBgColourMultiplier: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  scrambleEmojiCycles: 6
+  scrambleCycleDuration: 2
   repressBeam: {fileID: 1458628451}
   isHuman: 1
   botActiveTimeout: 30
@@ -17605,7 +17607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9088251dcb3470743803688c77d1b8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugLevel: 0
+  DebugLevel: 3
   manager: {fileID: 1020714967}
   mmFmodManager: {fileID: 7777836843469874670}
   emojiFireObject: {fileID: 6401195957948078499, guid: 531ae79f6bd9ec14ab7ed7c76e4ad03b,
@@ -17641,6 +17643,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4400f72feaedb984fafcdd3a929a329b, type: 3}
   playerBackground: {fileID: 2132107373}
   playerBgColourMultiplier: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  scrambleEmojiCycles: 6
+  scrambleCycleDuration: 2
   repressBeam: {fileID: 1377796478}
   isHuman: 1
   botActiveTimeout: 30
@@ -19747,7 +19751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9088251dcb3470743803688c77d1b8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugLevel: 0
+  DebugLevel: 3
   manager: {fileID: 1020714967}
   mmFmodManager: {fileID: 7777836843469874670}
   emojiFireObject: {fileID: 6401195957948078499, guid: 531ae79f6bd9ec14ab7ed7c76e4ad03b,
@@ -19783,6 +19787,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4400f72feaedb984fafcdd3a929a329b, type: 3}
   playerBackground: {fileID: 1269941339}
   playerBgColourMultiplier: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  scrambleEmojiCycles: 6
+  scrambleCycleDuration: 2
   repressBeam: {fileID: 1435701900}
   isHuman: 1
   botActiveTimeout: 30
