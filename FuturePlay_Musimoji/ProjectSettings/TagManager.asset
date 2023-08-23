@@ -43,6 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: MainMenu
+  - name: Background
+    uniqueID: 3262743047
+    locked: 0
+  - name: Emojis
+    uniqueID: 4029191253
+    locked: 0
+  - name: Players
+    uniqueID: 2697931463
+    locked: 0
+  - name: UI
     uniqueID: 3255079805
     locked: 0

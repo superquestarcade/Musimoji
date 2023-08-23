@@ -9,6 +9,19 @@ public class MM_BackgroundColourManager : MonoBehaviourPlus
     [SerializeField] private SpriteRenderer[] triSpriteRenderersPlaySpace, triSpriteRenderersBorderSpace;
     private System.Random rng = new System.Random();
 
+    /*public string sortingLayer;
+    public bool setSpriteRenderersToBackgroundLayer = true;*/
+
+
+    /*private void OnValidate()
+    {
+        if (setSpriteRenderersToBackgroundLayer)
+        {
+            foreach (var sr in triSpriteRenderersBorderSpace) sr.sortingLayerName = sortingLayer;
+            foreach (var sr in triSpriteRenderersPlaySpace) sr.sortingLayerName = sortingLayer;
+        }
+    }*/
+
     private void Start()
     {
         ClearColors();

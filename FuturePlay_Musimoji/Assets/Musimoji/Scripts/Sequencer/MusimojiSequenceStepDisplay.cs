@@ -1,10 +1,13 @@
 using System.Collections;
+using Musimoji;
 using TMPro;
 using UnityEngine;
 
 public class MusimojiSequenceStepDisplay : MonoBehaviourPlus
 {
     public int EmojiID { get; private set; } = 0;
+
+    [SerializeField] private MM_EmojiDisplay emojiDisplay;
 
     public Sprite[] emojiSprites;
     public Color[] emojiHitColors;
@@ -31,13 +34,13 @@ public class MusimojiSequenceStepDisplay : MonoBehaviourPlus
 
     public void StepActive(bool value)
     {
-        background.color = value ? backgroundSelected:backgroundDefault;
+        if(background!=null) background.color = value ? backgroundSelected:backgroundDefault;
     }
 
     public void SetAsIndicator(bool value)
     {
-        background.color = value ? backgroundSelected:backgroundDefault;
-        foreground.enabled = !value;
+        if(background!=null) background.color = value ? backgroundSelected:backgroundDefault;
+        if(foreground!=null) foreground.enabled = !value;
     }
 
     public void SetDebugStepNumber(int step)
@@ -64,14 +67,15 @@ public class MusimojiSequenceStepDisplay : MonoBehaviourPlus
             return;
         }
         EmojiID = value;
+        if(emojiDisplay!=null) emojiDisplay.SetEmoji(EmojiID);
         if (value == 0)
         {
-            foreground.sprite = null;
-            background.enabled = true;
+            if(foreground!=null) foreground.sprite = null;
+            if(background!=null) background.enabled = true;
             return;
         }
-        foreground.sprite = emojiSprites[value-1];
-        background.enabled = false;
+        if(foreground!=null) foreground.sprite = emojiSprites[value-1];
+        if(background!=null) background.enabled = false;
         StartCoroutine(SetHitActive(value - 1, hitDuration));
     }
 
@@ -79,20 +83,23 @@ public class MusimojiSequenceStepDisplay : MonoBehaviourPlus
     {
         if(DebugMessages) Debug.Log("MusimojiSequenceStepDisplay.SetPowerup");
         EmojiID = 99;
-        foreground.sprite = powerupSprite;
-        background.enabled = false;
+        if(foreground!=null) foreground.sprite = powerupSprite;
+        if(background!=null) background.enabled = false;
     }
 
     private IEnumerator SetHitActive(int colorIndex, float duration)
     {
-        hitSlotDisplayBg.color = emojiHitColors[colorIndex];
-        hitSlotDisplayBg.enabled = true;
-        hitSlotDisplayFg.enabled = true;
+        if (hitSlotDisplayBg != null)
+        {
+            hitSlotDisplayBg.color = emojiHitColors[colorIndex];
+            hitSlotDisplayBg.enabled = true;
+        }
+        if(hitSlotDisplayFg!=null) hitSlotDisplayFg.enabled = true;
         
         if(vfxActive && hitVfx!=null) hitVfx.TriggerGroup(colorIndex);
         
         yield return new WaitForSeconds(duration);
-        hitSlotDisplayBg.enabled = false;
-        hitSlotDisplayFg.enabled = false;
+        if (hitSlotDisplayBg != null) hitSlotDisplayBg.enabled = false;
+        if(hitSlotDisplayFg!=null) hitSlotDisplayFg.enabled = false;
     }
 }
