@@ -1,21 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Musimoji;
 using Musimoji.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class MusimojiPlayer : MonoBehaviourPlus
 {
     [Header("Settings")]
     public MusimojiManager manager;
-    public GameObject emojiFireObject;
+    [SerializeField] private MM_FmodManager mmFmodManager;
+    [SerializeField] private GameObject emojiFireObject;
     [SerializeField] private List<GameObject> firedObjects = new List<GameObject>();
     private bool canFire = true, canRepress = true;
-    public float repressBeamDestroyDelay = 0.2f, repressBeamActiveDuration = 2f, repressBeamFireAgainDelay = 5f;
-    public float destroyFiredEmojiDelay = 1f, fireAgainDelay = 3.5f;
+    [SerializeField] private float repressBeamDestroyDelay = 0.2f, repressBeamActiveDuration = 2f, repressBeamFireAgainDelay = 5f;
+    [SerializeField] private float destroyFiredEmojiDelay = 1f, fireAgainDelay = 3.5f;
+    [SerializeField] private int repressStepCount = 3;
+    [SerializeField] private EmojiNoteMap fireNoteMap = new(), repressNoteMap = new();
     [SerializeField] private EmojiRefs_SO emojiRefs;
     
     [Header("Emojis")]
@@ -54,6 +58,16 @@ public class MusimojiPlayer : MonoBehaviourPlus
         CheckIsHuman();
     }
 
+    private void OnEnable()
+    {
+        manager.OnRepressEmoji.AddListener(OnRepressEmoji);
+    }
+
+    private void OnDisable()
+    {
+        manager.OnRepressEmoji.RemoveListener(OnRepressEmoji);
+    }
+
     #region Player Management
 
     public void InitializeHuman()
@@ -90,13 +104,38 @@ public class MusimojiPlayer : MonoBehaviourPlus
     public void ResetBotTimer() => botActiveTimer = 0f;
 
     #endregion
+    
+    #region Note Based Input
+
+    public void OnNoteDown(Note note, float velocity)
+    {
+        if (fireNoteMap.Contains(note))
+        {
+            if(DebugMessages) Debug.Log($"MM_Player.OnNoteDown firing ({note})");
+            FireEmoji();
+            return;
+        }
+
+        if (repressNoteMap.Contains(note))
+        {
+            if(DebugMessages) Debug.Log($"MM_Player.OnNoteDown repressing ({note})");
+            FireRepress();
+            return;
+        }
+        if(DebugMessages) Debug.Log($"MM_Player.OnNoteDown updating emoji display ({note})");
+        UpdateEmojiDisplay(emojiRefs.GetIndex(note));
+    }
+    
+    #endregion
 
     #region Firing
 
     public void FireEmoji()
     {
         if (!manager.PlayerControlActive || !canFire) return;
+        if (selectedEmoji == 0) SetEmoji(Random.Range(1,emojiSprites.Length));
         EmojiExpressEvent.Invoke();
+        mmFmodManager.OnPlayerExpressEmoji(playerID, selectedEmoji);
         canFire = false;
         var newObject = Instantiate(emojiFireObject, transform.position, transform.rotation, transform);
         var setSprite = emptyEmoji;
@@ -119,7 +158,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
         EmojiHitEvent?.Invoke();
         callback?.Invoke();
         yield return new WaitForSeconds(fireAgainDelay);
-        emojiDisplay.sprite = emojiSprites[selectedEmoji - 1];
+        SetEmoji(selectedEmoji);
         canFire = true;
         EmojiReloadEvent?.Invoke();
     }
@@ -150,13 +189,11 @@ public class MusimojiPlayer : MonoBehaviourPlus
     public void NextEmoji()
     {
         if (!manager.PlayerControlActive || !canFire) return;
-        
         selectedEmoji += 1;
         if (selectedEmoji <= 0) selectedEmoji = emojiSprites.Length;
         if (selectedEmoji > emojiSprites.Length) selectedEmoji = 1;
         if(DebugMessages) Debug.Log($"NextEmoji Player {playerID}: Selecting emoji {selectedEmoji}");
         UpdateEmojiDisplay();
-        EmojiChangeEvent?.Invoke(selectedEmoji);
     }
 
     /// <summary>
@@ -165,19 +202,20 @@ public class MusimojiPlayer : MonoBehaviourPlus
     /// <param name="value">Emoji type (not index) starts at 1</param>
     public void SetEmoji(int value)
     {
-        if (value <= 0 || value > emojiSprites.Length)
+        if (value < 0 || value > emojiSprites.Length)
         {
             Debug.LogError($"MM_Player.SetEmoji no sprite available for this emoji index. Abort! ({value})");
             return;
         }
-
         selectedEmoji = value;
+        if (selectedEmoji == 0)
+        {
+            emojiDisplay.sprite = null;
+            if (playerBackground == null) return;
+            playerBackground.SetBgColor(Color.grey);
+            return;
+        }
         UpdateEmojiDisplay();
-    }
-
-    public void SetEmoji(Note note, float velocity)
-    {
-        UpdateEmojiDisplay(emojiRefs.GetIndex(note));
     }
 
     private void UpdateEmojiDisplay()
@@ -190,19 +228,20 @@ public class MusimojiPlayer : MonoBehaviourPlus
             var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];
             playerBackground.SetBgColor(bgColour);
         }
+        
+        EmojiChangeEvent?.Invoke(selectedEmoji);
     }
 
     private void UpdateEmojiDisplay(int emojiType)
     {
+        if (emojiType < 0) return;
         if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {emojiType}");
         selectedEmoji = emojiType;
         if (emojiDisplay != null) emojiDisplay.sprite = emojiRefs.GetSprite(selectedEmoji);
 
-        if (playerBackground != null)
-        {
-            var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];
-            playerBackground.SetBgColor(bgColour);
-        }
+        if (playerBackground == null) return;
+        var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];
+        playerBackground.SetBgColor(bgColour);
     }
     
     #endregion
@@ -231,7 +270,14 @@ public class MusimojiPlayer : MonoBehaviourPlus
     private void Repress()
     {
         if(DebugMessages) Debug.Log($"Repress {playerID}");
-        manager.PlayerFireEmoji(playerID, 0);
+        manager.PlayerRepress(playerID, repressStepCount);
+    }
+
+    private void OnRepressEmoji(int emojiId)
+    {
+        if (selectedEmoji != emojiId) return;
+        if(DebugMessages) Debug.Log($"MM_Player.OnRepressEmoji selectedEmoji {selectedEmoji}");
+        SetEmoji(0);
     }
     
     #endregion

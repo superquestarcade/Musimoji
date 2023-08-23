@@ -233,7 +233,7 @@ Transform:
   - {fileID: 757718796}
   - {fileID: 138706025}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &20645349
 MonoBehaviour:
@@ -3628,37 +3628,6 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1173049868}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &774782740
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 774782741}
-  m_Layer: 0
-  m_Name: Move
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &774782741
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774782740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.68, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775828989
 GameObject:
   m_ObjectHideFlags: 0
@@ -5274,7 +5243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2fe9f74ed975a429b96b985dae76dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugLevel: 0
+  DebugLevel: 1
   debugStepIndicators: 0
   sequencer: {fileID: 7777836843469874669}
   emojiColors:
@@ -5292,6 +5261,8 @@ MonoBehaviour:
   sequenceStepDisplayPrefab: {fileID: 3841160708325613377, guid: cdeef1ed2c0c7c5488443d6986b3ca5f,
     type: 3}
   sequenceStepDisplays: []
+  powerupMinDuration: 0
+  powerupMaxDuration: 0
   currentSequenceData: 
   winEmoji: {fileID: 1620032064}
   emojiSprites:
@@ -5357,6 +5328,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnRepressEmoji:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1020714968
 Transform:
   m_ObjectHideFlags: 0
@@ -5373,7 +5347,7 @@ Transform:
   - {fileID: 1176141472}
   - {fileID: 1620032063}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1021436701 stripped
 SpriteRenderer:
@@ -14998,7 +14972,7 @@ Transform:
   - {fileID: 516108979}
   - {fileID: 1705424489}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 120}
 --- !u!114 &1213963909
 MonoBehaviour:
@@ -15014,6 +14988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugLevel: 0
   manager: {fileID: 1020714967}
+  mmFmodManager: {fileID: 7777836843469874670}
   emojiFireObject: {fileID: 6401195957948078499, guid: 531ae79f6bd9ec14ab7ed7c76e4ad03b,
     type: 3}
   firedObjects: []
@@ -15022,6 +14997,15 @@ MonoBehaviour:
   repressBeamFireAgainDelay: 2
   destroyFiredEmojiDelay: 0.5
   fireAgainDelay: 1.5
+  repressStepCount: 3
+  fireNoteMap:
+    index: -1
+    noteGroup: {fileID: 11400000, guid: 66cbc33383eda1040b5d202289603bb9, type: 2}
+    emojiSprite: {fileID: 0}
+  repressNoteMap:
+    index: -1
+    noteGroup: {fileID: 11400000, guid: 65cbefd17fb12584a9c1603025930b0d, type: 2}
+    emojiSprite: {fileID: 0}
   emojiRefs: {fileID: 11400000, guid: 96d94ece8ef8ec1428e811a531c79d31, type: 2}
   playerID: 2
   emojiDisplay: {fileID: 198744073}
@@ -15210,7 +15194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5be80728cccd4f8250e6daffc961a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   player: {fileID: 1213963909}
   playerAnimator: {fileID: 1318428794}
   botAnimator: {fileID: 1850545427}
@@ -15297,7 +15281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60662af998cb41ad8ff298eb23f95108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugLevel: 0
+  DebugLevel: 3
 --- !u!114 &1225382200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17329,7 +17313,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  introActive: 1
+  introActive: 0
   currentSlide: 0
 --- !u!4 &1479415219
 Transform:
@@ -17607,7 +17591,7 @@ Transform:
   - {fileID: 1748383161}
   - {fileID: 369262859}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -120}
 --- !u!114 &1514381127
 MonoBehaviour:
@@ -17623,6 +17607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugLevel: 0
   manager: {fileID: 1020714967}
+  mmFmodManager: {fileID: 7777836843469874670}
   emojiFireObject: {fileID: 6401195957948078499, guid: 531ae79f6bd9ec14ab7ed7c76e4ad03b,
     type: 3}
   firedObjects: []
@@ -17631,6 +17616,15 @@ MonoBehaviour:
   repressBeamFireAgainDelay: 2
   destroyFiredEmojiDelay: 0.5
   fireAgainDelay: 1.5
+  repressStepCount: 3
+  fireNoteMap:
+    index: -1
+    noteGroup: {fileID: 11400000, guid: 66cbc33383eda1040b5d202289603bb9, type: 2}
+    emojiSprite: {fileID: 0}
+  repressNoteMap:
+    index: -1
+    noteGroup: {fileID: 11400000, guid: 65cbefd17fb12584a9c1603025930b0d, type: 2}
+    emojiSprite: {fileID: 0}
   emojiRefs: {fileID: 11400000, guid: 96d94ece8ef8ec1428e811a531c79d31, type: 2}
   playerID: 1
   emojiDisplay: {fileID: 1297945297}
@@ -17819,7 +17813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5be80728cccd4f8250e6daffc961a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   player: {fileID: 1514381127}
   playerAnimator: {fileID: 1417470848}
   botAnimator: {fileID: 99014478}
@@ -18425,7 +18419,7 @@ PrefabInstance:
     - target: {fileID: 1004999041816902364, guid: 5358ad8c253ad934784d79d1ef0886e5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1004999041816902364, guid: 5358ad8c253ad934784d79d1ef0886e5,
         type: 3}
@@ -19739,7 +19733,7 @@ Transform:
   - {fileID: 1059207215}
   - {fileID: 955501345}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1800781031
 MonoBehaviour:
@@ -19755,6 +19749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugLevel: 0
   manager: {fileID: 1020714967}
+  mmFmodManager: {fileID: 7777836843469874670}
   emojiFireObject: {fileID: 6401195957948078499, guid: 531ae79f6bd9ec14ab7ed7c76e4ad03b,
     type: 3}
   firedObjects: []
@@ -19763,6 +19758,15 @@ MonoBehaviour:
   repressBeamFireAgainDelay: 2
   destroyFiredEmojiDelay: 0.5
   fireAgainDelay: 1.5
+  repressStepCount: 3
+  fireNoteMap:
+    index: -1
+    noteGroup: {fileID: 11400000, guid: 66cbc33383eda1040b5d202289603bb9, type: 2}
+    emojiSprite: {fileID: 0}
+  repressNoteMap:
+    index: -1
+    noteGroup: {fileID: 11400000, guid: 65cbefd17fb12584a9c1603025930b0d, type: 2}
+    emojiSprite: {fileID: 0}
   emojiRefs: {fileID: 11400000, guid: 96d94ece8ef8ec1428e811a531c79d31, type: 2}
   playerID: 0
   emojiDisplay: {fileID: 2010778216}
@@ -19951,7 +19955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5be80728cccd4f8250e6daffc961a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   player: {fileID: 1800781031}
   playerAnimator: {fileID: 802707304}
   botAnimator: {fileID: 1393918394}
@@ -20962,7 +20966,7 @@ Transform:
   m_Children:
   - {fileID: 1173049869}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1807393407 stripped
 SpriteRenderer:
@@ -23102,7 +23106,7 @@ Transform:
   - {fileID: 369077870}
   - {fileID: 190318801}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7777836843469874669
 MonoBehaviour:
@@ -23116,7 +23120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc254df7b798c0441b14f8881b1dc751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   playOnStart: 1
   bpm: 120
   sequenceStepCount: 16
@@ -23140,7 +23144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577771f5ed5d37f419af5ab5b5d55e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   mmManager: {fileID: 1020714967}
   startGameEventReference:
     Guid:
@@ -23222,3 +23226,52 @@ MonoBehaviour:
       Data3: 1942866568
       Data4: -1838630390
     Path: event:/Win_Anticipation
+  playerExpressEventReferences:
+  - Guid:
+      Data1: 689394586
+      Data2: 1118083899
+      Data3: 347531907
+      Data4: -1128243348
+    Path: event:/Emote_Joy
+  - Guid:
+      Data1: 1783532422
+      Data2: 1306635686
+      Data3: -1144345958
+      Data4: -138585189
+    Path: event:/Emote_Trust
+  - Guid:
+      Data1: 1721461595
+      Data2: 1272176228
+      Data3: -1922509930
+      Data4: 1402857011
+    Path: event:/Emote_Fear
+  - Guid:
+      Data1: 922802852
+      Data2: 1302835677
+      Data3: 1663440021
+      Data4: 1839105527
+    Path: event:/Emote_Surprise
+  - Guid:
+      Data1: -767035113
+      Data2: 1166043260
+      Data3: 339077007
+      Data4: -857403732
+    Path: event:/Emote_Sadness
+  - Guid:
+      Data1: -1667467705
+      Data2: 1221687496
+      Data3: 1469041055
+      Data4: -581031461
+    Path: event:/Emote_Disgust
+  - Guid:
+      Data1: -1074571930
+      Data2: 1192802399
+      Data3: 187339196
+      Data4: -1785527730
+    Path: event:/Emote_Anger
+  - Guid:
+      Data1: -1856904590
+      Data2: 1082627512
+      Data3: -934154846
+      Data4: -1023256821
+    Path: event:/Emote_Anticipation

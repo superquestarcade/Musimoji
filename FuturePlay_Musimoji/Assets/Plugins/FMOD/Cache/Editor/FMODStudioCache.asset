@@ -123,7 +123,7 @@ MonoBehaviour:
   Name: Joy
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 382602645
@@ -147,7 +147,7 @@ MonoBehaviour:
   Name: Disgust
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 674882848
@@ -195,7 +195,7 @@ MonoBehaviour:
   Name: Joy
   StudioPath: parameter:/Joy
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 382602645
@@ -246,7 +246,7 @@ MonoBehaviour:
   Name: Fear
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1403762248
@@ -270,7 +270,7 @@ MonoBehaviour:
   Name: Anticipation
   StudioPath: parameter:/Anticipation
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1790776779
@@ -294,7 +294,7 @@ MonoBehaviour:
   Name: Anticipation
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1790776779
@@ -346,7 +346,7 @@ MonoBehaviour:
   Name: Disgust
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 674882848
@@ -424,7 +424,7 @@ MonoBehaviour:
   Name: Sadness
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3712140967
@@ -448,7 +448,7 @@ MonoBehaviour:
   Name: Anger
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1352675076
@@ -524,7 +524,7 @@ MonoBehaviour:
   Name: Disgust
   StudioPath: parameter:/Disgust
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 674882848
@@ -548,7 +548,7 @@ MonoBehaviour:
   Name: Fear
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1403762248
@@ -599,7 +599,7 @@ MonoBehaviour:
   Name: Anticipation
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1790776779
@@ -623,7 +623,7 @@ MonoBehaviour:
   Name: Disgust
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 674882848
@@ -675,7 +675,7 @@ MonoBehaviour:
   Name: Fear
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1403762248
@@ -727,7 +727,7 @@ MonoBehaviour:
   Path: ../MusiMojiFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638253599742920664
+  lastModified: 638277975658450740
   FileSizes:
   - Name: Desktop
     Value: 19501440
@@ -775,7 +775,7 @@ MonoBehaviour:
   Name: Trust
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3269267913
@@ -874,7 +874,7 @@ MonoBehaviour:
   - {fileID: -1559844297427545097}
   StringsBanks:
   - {fileID: 7883605320144414891}
-  cacheTime: 638253599742950566
+  cacheTime: 638277975658490633
   cacheVersion: 131591
 --- !u!114 &593096362594807003
 MonoBehaviour:
@@ -918,7 +918,7 @@ MonoBehaviour:
   Name: Surprise
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1443360877
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   Name: Trust
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3269267913
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   Name: Anticipation
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1790776779
@@ -1215,7 +1215,7 @@ MonoBehaviour:
   Name: Trust
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3269267913
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   Name: Anger
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1352675076
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   Name: Sadness
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3712140967
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   Name: Joy
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 382602645
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   Name: Surprise
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1443360877
@@ -1417,7 +1417,7 @@ MonoBehaviour:
   Name: Sadness
   StudioPath: parameter:/Sadness
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3712140967
@@ -1441,7 +1441,7 @@ MonoBehaviour:
   Name: Surprise
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1443360877
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   Name: Joy
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 382602645
@@ -1544,7 +1544,7 @@ MonoBehaviour:
   Name: Fear
   StudioPath: parameter:/Fear
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1403762248
@@ -1732,7 +1732,7 @@ MonoBehaviour:
   Name: Surprise
   StudioPath: parameter:/Surprise
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1443360877
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   Name: Anger
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1352675076
@@ -1780,7 +1780,7 @@ MonoBehaviour:
   Path: ../MusiMojiFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638253599742950566
+  lastModified: 638277975658490633
   FileSizes:
   - Name: Desktop
     Value: 2730
@@ -1824,7 +1824,7 @@ MonoBehaviour:
   Name: Anger
   StudioPath: parameter:/Anger
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 1352675076
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   Name: Sadness
   StudioPath: 
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3712140967
@@ -1900,7 +1900,7 @@ MonoBehaviour:
   Name: Trust
   StudioPath: parameter:/Trust
   Min: 0
-  Max: 3
+  Max: 1
   Default: 0
   ID:
     data1: 3269267913

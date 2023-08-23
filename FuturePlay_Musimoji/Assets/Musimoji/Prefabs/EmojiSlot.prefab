@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4bb34dffdafe240a395e75b34d90eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   emojiSprites:
   - {fileID: 21300000, guid: 88a8e8830f680c04a98620cd54107899, type: 3}
   - {fileID: 21300000, guid: 121fe3533adb8ab448ab29c06a7e5365, type: 3}
@@ -263,6 +263,7 @@ MonoBehaviour:
   hitDuration: 1.5
   stepNumberCanvas: {fileID: 7293527385083304357}
   debugStepNumberText: {fileID: 7107866265313399729}
+  vfxActive: 0
   hitVfx: {fileID: 1663430559530351189}
 --- !u!212 &3841160708325613379
 SpriteRenderer:
