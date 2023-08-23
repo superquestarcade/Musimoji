@@ -3,14 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MM_PlayerAnimationManager : MonoBehaviour
+public class MM_PlayerAnimationManager : MonoBehaviourPlus
 {
-    public bool debugMessages = false;
-
     [SerializeField] private MusimojiPlayer player;
-    
     [SerializeField] private Animator playerAnimator, botAnimator;
-    
     private Animator Anim => (player.IsHuman ? playerAnimator : botAnimator);
 
     private void OnEnable()

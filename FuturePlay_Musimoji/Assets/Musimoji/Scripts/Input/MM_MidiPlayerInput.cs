@@ -65,8 +65,7 @@ namespace Musimoji
         {
             if(DebugMessages) Debug.Log($"MusimojiInput.OnMidiNoteDown (player {player.playerID})");
             player.InitializeHuman();
-            player.SetEmoji(note, velocity);
-            player.FireEmoji();
+            player.OnNoteDown(note, velocity);
             player.ResetBotTimer();
         }
     

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,12 +32,9 @@ public class MM_Sequencer : MonoBehaviourPlus
     private void StepTick()
     {
         if (!isPlaying) return;
-        
         stepTimer += Time.deltaTime;
         sequenceTimer += Time.deltaTime;
-
         if (stepTimer < StepDuration) return;
-        
         if(DebugMessages) Debug.Log("MM_Sequencer.StepTick");
         CalculateNextStep();
         OnAnyStep?.Invoke(currentStep, sequenceData[currentStep-1]);
@@ -51,11 +44,36 @@ public class MM_Sequencer : MonoBehaviourPlus
     {
         currentStep++;
         stepTimer -= StepDuration;
-        
-        if (currentStep <= sequenceStepCount) return;
-        
-        currentStep -= sequenceStepCount;
+        if (WrapStepCount(ref currentStep)) return;
         sequenceTimer -= SequenceDuration;
+    }
+
+    public bool WrapStepCount(ref int stepCount)
+    {
+        if (stepCount <= sequenceStepCount) return false;
+        stepCount -= sequenceStepCount;
+        return true;
+    }
+
+    public int StepsFromAtoB(int a, int b)
+    {
+        if (a < 0 || a > sequenceStepCount)
+        {
+            Debug.LogError($"MM_Sequencer.StepsFromAtoB value a out of sequence range ({a}/{sequenceStepCount})");
+            return -1;
+        }
+        if (b < 0 || b > sequenceStepCount)
+        {
+            Debug.LogError($"MM_Sequencer.StepsFromAtoB value b out of sequence range ({b}/{sequenceStepCount})");
+            return -1;
+        }
+        
+        if (a <= b)
+        {
+            return b - a;
+        }
+
+        return (b + sequenceStepCount) - a;
     }
 
     public void StartPlaying()
@@ -97,6 +115,7 @@ public class MM_Sequencer : MonoBehaviourPlus
     {
         if(DebugMessages) Debug.Log($"MM_Sequencer.SetStep {step} value {value}");
         sequenceData[step] = value;
+        OnSetSequenceData?.Invoke(sequenceData);
     }
 
     public float GetEmojiIntensity(int emojiIndex)

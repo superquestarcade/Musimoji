@@ -6,6 +6,7 @@
  * https://creativecommons.org/licenses/by/2.0/
  */
 
+using System.Text;
 using UnityEngine;
 using System.Threading;
 

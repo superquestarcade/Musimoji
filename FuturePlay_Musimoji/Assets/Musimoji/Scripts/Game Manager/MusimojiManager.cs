@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class MusimojiManager : MonoBehaviourPlus
 {
     #region Properties & Variables
-
+    
     public bool debugStepIndicators = false;
     public MM_Sequencer sequencer;
     [SerializeField] private Color[] emojiColors;
@@ -25,11 +26,16 @@ public class MusimojiManager : MonoBehaviourPlus
     public GameObject sequenceStepDisplayPrefab;
     public MusimojiSequenceStepDisplay[] sequenceStepDisplays;
     private MusimojiSequenceStepDisplay sequenceStepIndicator;
+    private List<Vector3Int> repressList = new();
+
+    [Header("Powerups")] 
+    [SerializeField] private float powerupMinDuration, powerupMaxDuration;
+    private float powerupDuration, powerupTimer;
     
-    //Audio sequence
+    [Header("Audio sequence")]
     [SerializeField] private int[] currentSequenceData;
     
-    //Win emoji
+    [Header("Win emoji")]
     public SpriteRenderer winEmoji;
     public Sprite[] emojiSprites;
     private int winType = -1;
@@ -41,17 +47,24 @@ public class MusimojiManager : MonoBehaviourPlus
     [SerializeField] private int[] winningSequence;
     private bool isWinning = false;
     
-    // Arduino LED Control
+    [Header("Arduino LED Control")]
     [SerializeField] private bool arduinoLedControlEnabled = true;
-
+    
+    [Header("Events")]
     public UnityEvent<int> OnWin;
     public UnityEvent<float> OnWinIntensity;
     public UnityEvent OnStartGame;
     public UnityEvent OnEndGame;
+    public UnityEvent<int> OnRepressEmoji;
     
     #endregion
 
     #region Unity Functions
+
+    private void Awake()
+    {
+        if (!arduinoLedControlEnabled) ArduinoLEDControl.Singleton.enabled = false;
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -75,7 +88,7 @@ public class MusimojiManager : MonoBehaviourPlus
     {
         rotationDelta = (sequencer.SequenceTimer / sequencer.SequenceDuration) * 360;
         RotateSequence(rotationDelta);
-
+        // PowerUpUpdate();
         IsWinning();
     }
 
@@ -109,17 +122,17 @@ public class MusimojiManager : MonoBehaviourPlus
         var position = (Vector2)centrePointTransform.position;
         if (sequencer.SequenceStepCount < 1) return position;
 
-        float angleSection = Mathf.PI * 2f / sequencer.SequenceStepCount;
-        float angle = (Mathf.Deg2Rad * 90) + (stepCount * angleSection);
+        var angleSection = Mathf.PI * 2f / sequencer.SequenceStepCount;
+        var angle = (Mathf.Deg2Rad * 90) + (stepCount * angleSection);
         Vector2 offset = new Vector3(-Mathf.Cos(angle), Mathf.Sin(angle), 0) * sequenceDisplayRadius;
         return position + offset;
     }
 
     private void OnSequenceStep(int currentStep, int stepValue)
     {
-        if(DebugMessages) Debug.Log($"MusimojiManager.OnSequenceStep {currentStep} value {stepValue}");
+        if(DebugLevel>DebugMessageLevel.MODERATE) Debug.Log($"MusimojiManager.OnSequenceStep {currentStep} value {stepValue}");
         this.currentStep = currentStep;
-
+        CheckRepressRequests();
         // stepTime = 0;
     }
 
@@ -139,7 +152,6 @@ public class MusimojiManager : MonoBehaviourPlus
         SetSequenceStep(playerStepIndex, emojiId);
         if(DebugMessages) Debug.Log($"MusimojiManager.PlayerFireEmoji player {playerID}, " +
                                     $"emoji {emojiId}, slot {playerStepIndex}");
-        SetAudioSequenceData();
         CheckWinCondition(playerStepIndex, SetWinningRun);
     }
 
@@ -188,6 +200,53 @@ public class MusimojiManager : MonoBehaviourPlus
         return returnStep;
     }
 
+    public void PlayerRepress(int playerId, int repressStepCount)
+    {
+        if (DebugLevel>DebugMessageLevel.MINIMAL)
+            Debug.Log($"MM_Manager.PlayerRepress ({playerId}) currentStep {currentStep}");
+        repressList.Add(new Vector3Int(currentStep, playerId, repressStepCount));
+        var repressSequenceData = currentSequenceData[PlayerStepIndex(playerId)];
+        PlayerFireEmoji(playerId, 0);
+        OnRepressEmoji?.Invoke(repressSequenceData);
+    }
+
+    private void CheckRepressRequests()
+    {
+        if(repressList.Count<=0) return;
+        if (DebugLevel>DebugMessageLevel.MINIMAL)
+            Debug.Log($"MM_Manager.CheckRepressRequests ({repressList.Count})," +
+                                        $" currentStep {currentStep}");
+        var updatedRepressRequests = new List<Vector3Int>();
+        foreach (var request in repressList)
+        {
+            // Remove request if current step has passed end step
+            var requestEndStep = request.x + request.z;
+            sequencer.WrapStepCount(ref requestEndStep);
+            var stepsFrom = sequencer.StepsFromAtoB(currentStep, requestEndStep);
+            if (DebugLevel>DebugMessageLevel.MINIMAL)
+                Debug.Log($"MM_Manager.CheckRepressRequests currentStep {currentStep}, " +
+                              $"requestEndStep {requestEndStep}, steps between {stepsFrom}");
+            if (stepsFrom >= request.z)
+            {
+                // Don't repress & discard request
+                if (DebugLevel>DebugMessageLevel.MINIMAL)
+                    Debug.Log($"MM_Manager.CheckRepressRequests steps between {stepsFrom} >= " +
+                                  $"stepCount {request.z}. Discarding request");
+                continue;
+            }
+            
+            // Repress player step
+            if (DebugLevel>DebugMessageLevel.MINIMAL)
+                Debug.Log(
+                    $"MM_Manager.CheckRepressRequests repressing player {request.y}");
+            PlayerFireEmoji(request.y, 0);
+            
+            // Add to updated requests
+            updatedRepressRequests.Add(request);
+        }
+        repressList = updatedRepressRequests;
+    }
+
     #endregion
 
     #region Sequence
@@ -196,6 +255,7 @@ public class MusimojiManager : MonoBehaviourPlus
     {
         sequenceStepDisplays[step].SetEmoji(emojiId);
         currentSequenceData[step] = emojiId;
+        sequencer.SetStep(step,emojiId);
     }
 
     private void SetAudioSequenceData()
@@ -208,15 +268,10 @@ public class MusimojiManager : MonoBehaviourPlus
         if (index + 1 >= sequence.Length)
         {
             if(DebugMessages) Debug.Log($"NextIndexInSequenceData for index {index} >= sequence.Length. Wrapping to min index.");
-
             return index + 1 - sequence.Length;
         }
-        else
-        {
-            if(DebugMessages) Debug.Log($"NextIndexInSequenceData for index {index} < sequence.Length. Returning {index + 1}");
-            
-            return index + 1;
-        }
+        if(DebugMessages) Debug.Log($"NextIndexInSequenceData for index {index} < sequence.Length. Returning {index + 1}");
+        return index + 1;
     }
 
     private int PreviousIndexInSequenceData(int[] sequence, int index)
@@ -224,21 +279,15 @@ public class MusimojiManager : MonoBehaviourPlus
         if (index - 1 < 0)
         {
             if(DebugMessages) Debug.Log($"PreviousIndexInSequenceData for index {index} < 0. Wrapping to max index {sequence.Length - 1}");
-
             return sequence.Length - 1;
         }
-        else
-        {
-            if(DebugMessages) Debug.Log($"PreviousIndexInSequenceData for index {index} >= 0. Returning {index - 1}");
-
-            return index - 1;
-        }
+        if(DebugMessages) Debug.Log($"PreviousIndexInSequenceData for index {index} >= 0. Returning {index - 1}");
+        return index - 1;
     }
 
     public void StartGame()
     {
         ResetGame();
-        
         OnStartGame?.Invoke();
     }
 
@@ -246,18 +295,45 @@ public class MusimojiManager : MonoBehaviourPlus
     {
         winEmoji.size = Vector2.one;
         winEmoji.enabled = false;
-        
         if(arduinoLedControlEnabled) ArduinoLEDControl.SetState(LEDPlayState.PLAYING);
-        
         sequencer.Restart();
-        
         currentSequenceData = new int[sequencer.SequenceStepCount];
         SetAudioSequenceData();
         foreach(var s in sequenceStepDisplays) s.SetEmoji(0);
-        
         PlayerControlActive = true;
     }
 
+    #endregion
+    
+    #region Power Up
+
+    private void PowerUpUpdate()
+    {
+        // Update timer
+        powerupTimer += Time.deltaTime;
+        if (powerupTimer < powerupDuration) return;
+        // Add power up
+        AddPowerUp();
+        ResetPowerupTimer();
+    }
+
+    private void AddPowerUp()
+    {
+        Debug.LogWarning("MM_Manager.AddPowerup");
+        // Find available empty slots
+        
+        // If no slots do nothing
+        
+        // Pick a random slot & add power up
+        
+    }
+
+    private void ResetPowerupTimer()
+    {
+        powerupTimer = 0;
+        powerupDuration = Random.Range(powerupMinDuration, powerupMaxDuration);
+    }
+    
     #endregion
     
     #region Pods
