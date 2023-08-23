@@ -20020,8 +20020,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4717dafff9773438019f70e5b14679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMessages: 0
+  DebugLevel: 0
   mmManager: {fileID: 1020714967}
+  mmSequencer: {fileID: 7777836843469874669}
   emojiColorsPlaySpace:
   - {r: 0.23584908, g: 0.22434051, b: 0.20803669, a: 1}
   - {r: 0.64, g: 0.5019608, b: 0, a: 1}

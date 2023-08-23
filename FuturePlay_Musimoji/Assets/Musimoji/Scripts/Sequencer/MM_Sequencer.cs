@@ -8,20 +8,23 @@ public class MM_Sequencer : MonoBehaviourPlus
     public int bpm;
     [SerializeField] private int sequenceStepCount = 16;
     private int currentStep;
+    public int CurrentStepValue => CurrentSequence[currentStep];
     public int SequenceStepCount => sequenceStepCount;
     public float StepDuration => (float) bpm/60/4;
     public float SequenceDuration => StepDuration * sequenceStepCount;
     [SerializeField] private float stepTimer, sequenceTimer;
     public float SequenceTimer => sequenceTimer;
-    private int[] sequenceData;
-    public int SequencerCount => sequenceData.Length;
+    public int[] CurrentSequence { get; private set; }
+
+    public int SequencerCount => CurrentSequence.Length;
     public UnityEvent<int, int> OnAnyStep;
+    public UnityEvent<int, int> OnSetStep;
     public UnityEvent<int[]> OnSetSequenceData;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        sequenceData = new int[sequenceStepCount];
+        CurrentSequence = new int[sequenceStepCount];
     }
 
     private void FixedUpdate()
@@ -37,7 +40,7 @@ public class MM_Sequencer : MonoBehaviourPlus
         if (stepTimer < StepDuration) return;
         if(DebugMessages) Debug.Log("MM_Sequencer.StepTick");
         CalculateNextStep();
-        OnAnyStep?.Invoke(currentStep, sequenceData[currentStep-1]);
+        OnAnyStep?.Invoke(currentStep, CurrentSequence[currentStep-1]);
     }
 
     private void CalculateNextStep()
@@ -107,22 +110,23 @@ public class MM_Sequencer : MonoBehaviourPlus
     public void SetSequence(int[] sequence)
     {
         if(DebugMessages) Debug.Log("MM_Sequencer.SetSequence");
-        this.sequenceData = sequence;
-        OnSetSequenceData?.Invoke(this.sequenceData);
+        this.CurrentSequence = sequence;
+        OnSetSequenceData?.Invoke(this.CurrentSequence);
     }
 
     public void SetStep(int step, int value)
     {
         if(DebugMessages) Debug.Log($"MM_Sequencer.SetStep {step} value {value}");
-        sequenceData[step] = value;
-        OnSetSequenceData?.Invoke(sequenceData);
+        CurrentSequence[step] = value;
+        OnSetStep?.Invoke(step, value);
+        OnSetSequenceData?.Invoke(CurrentSequence);
     }
 
     public float GetEmojiIntensity(int emojiIndex)
     {
         var returnIntensity = 0;
 
-        foreach (var i in sequenceData)
+        foreach (var i in CurrentSequence)
         {
             if (i == emojiIndex) returnIntensity++;
             if (returnIntensity == 3) break;
