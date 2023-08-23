@@ -342,39 +342,13 @@ public class MusimojiManager : MonoBehaviourPlus
     
     #region Pods
 
-    public int[] GetPodSequenceValues(int podCount)
+    public int GetPodStepValue(int podStepIndex)
     {
-        if (currentSequenceData.Length < podCount)
-        {
-            Debug.LogWarning($"MM_Manager.GetPodSequenceValues podCount ({podCount}) " +
-                             $"not enough sequenceData ({currentSequenceData.Length})");
-            return null;
-        }
-        var returnValues = new List<int>();
-        for (var p = 0; p < podCount; p++)
-        {
-            var podStepIndex = PodStepIndex(p, podCount);
-            if (currentSequenceData.Length < podStepIndex)
-            {
-                Debug.LogWarning($"MM_Manager.GetPodSequenceValues podStepIndex ({podStepIndex}) " +
-                                 $"not enough sequenceData ({currentSequenceData.Length})");
-                return null;
-            }
-            returnValues.Add(currentSequenceData[podStepIndex]);
-        }
-
-        return returnValues.ToArray();
-    }
-    
-    private int PodStepIndex(int podIndex, int podCount)
-    {
-        var returnIndex = currentStep;
-        double sequenceTimePoint;
-        var podPoint = podIndex / podCount;
-        
-        sequenceTimePoint = sequencer.SequenceDuration / podPoint;
+        var returnIndex = currentStep+1;
+        double sequenceTimePoint = (sequencer.SequenceDuration / sequencer.SequenceStepCount) * podStepIndex;
         returnIndex += Mathf.FloorToInt((float)sequenceTimePoint / sequencer.StepDuration);
-        return returnIndex;
+        if (returnIndex >= sequencer.SequenceStepCount) returnIndex -= sequencer.SequenceStepCount;
+        return currentSequenceData[returnIndex];
     }
     
     #endregion

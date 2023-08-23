@@ -1,28 +1,37 @@
 using System;
 using UnityEngine;
 
-public class MM_PodControl : MonoBehaviour
+public class MM_PodControl : MonoBehaviourPlus
 {
     [SerializeField] private MusimojiManager manager;
+    [SerializeField] private MM_Sequencer sequencer;
     [SerializeField] private PodIndicatorStepData[] indicators;
 
     private void OnEnable()
     {
-        manager.sequencer.OnSetSequenceData.AddListener(UpdatePodsFromRelativeSequence);
+        manager.sequencer.OnAnyStep.AddListener(OnStep);
     }
 
     private void OnDisable()
     {
-        manager.sequencer.OnSetSequenceData.RemoveListener(UpdatePodsFromRelativeSequence);
+        manager.sequencer.OnAnyStep.RemoveListener(OnStep);
     }
 
-    private void UpdatePodsFromRelativeSequence(int[] sequencerData)
+    private void OnStep(int step, int stepValue)
     {
-        var relativeSequenceData = manager.GetPodSequenceValues(indicators.Length);
-        for (var index = 0; index < relativeSequenceData.Length; index++)
+        UpdatePodsFromRelativeSequence();
+    }
+
+    private void UpdatePodsFromRelativeSequence()
+    {
+        if(DebugLevel>DebugMessageLevel.MINIMAL) Debug.Log("MM_PodControl.UpdatePodsFromRelativeSequence");
+        for (var i = 0; i < indicators.Length; i++)
         {
-            var data = relativeSequenceData[index];
-            indicators[index].display.SetEmoji(data);
+            var indicator = indicators[i];
+            var podStepValue = manager.GetPodStepValue(indicator.step);
+            if(DebugLevel>DebugMessageLevel.MINIMAL) Debug.Log("MM_PodControl.UpdatePodsFromRelativeSequence" +
+                                                               $"indicator {i}, step {indicator.step}, value {podStepValue}");
+            indicator.display.SetEmoji(podStepValue);
         }
     }
 
