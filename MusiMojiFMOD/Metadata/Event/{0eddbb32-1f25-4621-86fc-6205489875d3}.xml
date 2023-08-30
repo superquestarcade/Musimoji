@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{a094bbb7-ff1b-431a-ad89-1166bd6a59a5}</destination>
 		</relationship>
+		<relationship name="parameters">
+			<destination>{fe81a632-e0a6-417f-8731-d21a09a98d6f}</destination>
+		</relationship>
 		<relationship name="banks">
 			<destination>{a47597c7-89a0-45e6-8d19-ed1efa6242a4}</destination>
 		</relationship>
@@ -88,6 +91,11 @@
 		</relationship>
 		<relationship name="markers">
 			<destination>{62c040f6-87d2-4b58-9b39-71b4daaa790c}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterProxy" id="{fe81a632-e0a6-417f-8731-d21a09a98d6f}">
+		<relationship name="preset">
+			<destination>{7e3796c7-f6f3-4e9b-95d5-298b203cc746}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{f2a6d943-d488-4127-8cbf-487cd182976d}">
@@ -298,6 +306,7 @@
 			<destination>{41527c45-5b5f-42bf-ac59-c72fbb1f5c8f}</destination>
 			<destination>{f3f89d15-cfc5-41c9-b90e-d4ef174a50f7}</destination>
 			<destination>{829305a1-081a-4620-854d-90c2ef30b3a0}</destination>
+			<destination>{c44619c7-3f08-49c1-9cc0-ae499d7207d3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{d252f142-4db9-4433-b54e-33171613d75d}" />
@@ -331,6 +340,20 @@
 		</property>
 		<property name="value">
 			<value>-80</value>
+		</property>
+		<property name="curveShape">
+			<value>0.142261833</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{c44619c7-3f08-49c1-9cc0-ae499d7207d3}">
+		<property name="position">
+			<value>0.20032840722495895</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.143844783</value>
 		</property>
 	</object>
 </objects>

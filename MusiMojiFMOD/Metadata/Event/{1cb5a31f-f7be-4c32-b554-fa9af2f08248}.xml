@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{4c0665a2-d2ea-4267-a053-9c1a06004310}</destination>
 		</relationship>
+		<relationship name="parameters">
+			<destination>{ed1e030c-ff16-46c8-818a-237a66a9bcc1}</destination>
+		</relationship>
 		<relationship name="banks">
 			<destination>{a47597c7-89a0-45e6-8d19-ed1efa6242a4}</destination>
 		</relationship>
@@ -88,6 +91,11 @@
 		</relationship>
 		<relationship name="markers">
 			<destination>{7e4682e3-3075-4e2a-a9f3-070b7cfd3653}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterProxy" id="{ed1e030c-ff16-46c8-818a-237a66a9bcc1}">
+		<relationship name="preset">
+			<destination>{742ba484-7a92-453d-8464-6d49dadb85b9}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{a84be553-ad7b-4db9-a5bc-bfc75687ef01}">
@@ -359,6 +367,7 @@
 			<destination>{18194b0a-b74d-4839-a2b6-2b2cb7e8229d}</destination>
 			<destination>{2262c0a7-fe42-401a-8152-f0efb58edb00}</destination>
 			<destination>{c8523e11-92aa-48c8-83b3-b69be8e21298}</destination>
+			<destination>{b2579de2-264d-4f9c-8b1a-04df73d79c40}</destination>
 		</relationship>
 	</object>
 	<object class="GainEffect" id="{29e2fce4-22a4-4f79-9e15-591290193fca}">
@@ -397,6 +406,20 @@
 		</property>
 		<property name="value">
 			<value>-80</value>
+		</property>
+		<property name="curveShape">
+			<value>0.101089746</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{b2579de2-264d-4f9c-8b1a-04df73d79c40}">
+		<property name="position">
+			<value>0.20032840722495895</value>
+		</property>
+		<property name="value">
+			<value>4</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.251370639</value>
 		</property>
 	</object>
 </objects>

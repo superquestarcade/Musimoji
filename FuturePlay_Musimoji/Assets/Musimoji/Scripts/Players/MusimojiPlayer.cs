@@ -254,6 +254,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
         if (playerBackground == null) return;
         var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];
         playerBackground.SetBgColor(bgColour);
+        EmojiChangeEvent?.Invoke(selectedEmoji);
     }
 
     private void CycleToRandomEmoji()

@@ -443,6 +443,7 @@
 			<destination>{24e3b4a3-6088-4bbe-a406-e082dde2452d}</destination>
 			<destination>{89e150df-f603-48c4-b69e-104bb03317df}</destination>
 			<destination>{4a33a0e6-f562-4f1a-b4eb-6361eba5a789}</destination>
+			<destination>{029cecf7-8ac1-4c97-a70a-92e62715c5c2}</destination>
 		</relationship>
 	</object>
 	<object class="GainEffect" id="{648efc58-cc80-45c8-8569-0c41257c046a}">
@@ -466,6 +467,9 @@
 		<property name="value">
 			<value>-80</value>
 		</property>
+		<property name="curveShape">
+			<value>0.183347136</value>
+		</property>
 	</object>
 	<object class="AutomationPoint" id="{89e150df-f603-48c4-b69e-104bb03317df}">
 		<property name="position">
@@ -481,6 +485,17 @@
 		</property>
 		<property name="value">
 			<value>-9</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{029cecf7-8ac1-4c97-a70a-92e62715c5c2}">
+		<property name="position">
+			<value>0.19950738916256158</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.22667703</value>
 		</property>
 	</object>
 </objects>

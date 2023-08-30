@@ -156,6 +156,34 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-7811143407883780275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Key_P2
+  m_EditorClassIdentifier: 
+  Path: event:/Key_P2
+  Guid:
+    Data1: 1900357275
+    Data2: 1185624760
+    Data3: 353185157
+    Data4: -41402964
+  Banks:
+  - {fileID: -1559844297427545097}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 5550720111490513150}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7703771703070569045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +259,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 9625
+--- !u!114 &-7270041406257152979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Key_P1
+  m_EditorClassIdentifier: 
+  Path: event:/Key_P1
+  Guid:
+    Data1: 140140339
+    Data2: 1180452323
+    Data3: -1544577361
+    Data4: 211023365
+  Banks:
+  - {fileID: -1559844297427545097}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -6306428721257596048}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7057276127704762191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +334,38 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 1
   Labels: []
+  Exists: 1
+--- !u!114 &-6306428721257596048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Key_P1/Note
+  m_EditorClassIdentifier: 
+  Name: Note
+  StudioPath: 
+  Min: 0
+  Max: 7
+  Default: 0
+  ID:
+    data1: 3962026994
+    data2: 3314656636
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - C
+  - D
+  - E
+  - F
+  - G
+  - A
+  - B
+  - C2
   Exists: 1
 --- !u!114 &-6234858476933256729
 MonoBehaviour:
@@ -408,7 +496,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 11365
+  Length: 10000
 --- !u!114 &-4356369976657944998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,7 +671,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 8514
+  Length: 10000
 --- !u!114 &-2841002851576146902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +748,38 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 147138
+--- !u!114 &-1645758576204536583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Key_P3/Note
+  m_EditorClassIdentifier: 
+  Name: Note
+  StudioPath: 
+  Min: 0
+  Max: 7
+  Default: 0
+  ID:
+    data1: 3962026994
+    data2: 3314656636
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - C
+  - D
+  - E
+  - F
+  - G
+  - A
+  - B
+  - C2
+  Exists: 1
 --- !u!114 &-1630653184622425945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,10 +847,10 @@ MonoBehaviour:
   Path: ../MusiMojiFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638277975658450740
+  lastModified: 638290032981727184
   FileSizes:
   - Name: Desktop
-    Value: 19501440
+    Value: 19591232
   Exists: 1
 --- !u!114 &-1420290634012737910
 MonoBehaviour:
@@ -860,6 +980,9 @@ MonoBehaviour:
   - {fileID: -952540456653487685}
   - {fileID: 4465303503870155622}
   - {fileID: 593096362594807003}
+  - {fileID: -7270041406257152979}
+  - {fileID: -7811143407883780275}
+  - {fileID: 6685746602308009196}
   EditorParameters:
   - {fileID: 8305881959480474484}
   - {fileID: -6487887548898538575}
@@ -874,7 +997,7 @@ MonoBehaviour:
   - {fileID: -1559844297427545097}
   StringsBanks:
   - {fileID: 7883605320144414891}
-  cacheTime: 638277975658490633
+  cacheTime: 638290032981767284
   cacheVersion: 131591
 --- !u!114 &593096362594807003
 MonoBehaviour:
@@ -902,7 +1025,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 8149
+  Length: 10000
 --- !u!114 &713587496115431971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,7 +1243,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 9125
+  Length: 10000
 --- !u!114 &2142437207398473618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,7 +1651,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 10187
+  Length: 10000
 --- !u!114 &4832366980246390049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1581,6 +1704,38 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10970
+--- !u!114 &5550720111490513150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Key_P2/Note
+  m_EditorClassIdentifier: 
+  Name: Note
+  StudioPath: 
+  Min: 0
+  Max: 7
+  Default: 0
+  ID:
+    data1: 3962026994
+    data2: 3314656636
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - C
+  - D
+  - E
+  - F
+  - G
+  - A
+  - B
+  - C2
+  Exists: 1
 --- !u!114 &5795031617715376708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,6 +1872,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &6685746602308009196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Key_P3
+  m_EditorClassIdentifier: 
+  Path: event:/Key_P3
+  Guid:
+    Data1: 1315232713
+    Data2: 1217517525
+    Data3: -1788518775
+    Data4: 1616116940
+  Banks:
+  - {fileID: -1559844297427545097}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1645758576204536583}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6725228660372871042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,10 +1963,10 @@ MonoBehaviour:
   Path: ../MusiMojiFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638277975658490633
+  lastModified: 638290032981767284
   FileSizes:
   - Name: Desktop
-    Value: 2730
+    Value: 2914
   Exists: 1
 --- !u!114 &8196377561602814639
 MonoBehaviour:
