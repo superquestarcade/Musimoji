@@ -7,9 +7,14 @@ public class MM_PodControl : MonoBehaviourPlus
     [SerializeField] private MM_Sequencer sequencer;
     [SerializeField] private PodIndicatorStepData[] indicators;
 
+    [Header("Settings")] 
+    [SerializeField] private bool indicatorsEnabled = false;
+    [SerializeField] private bool podsEnabled = true;
+
     private void OnEnable()
     {
         manager.sequencer.OnAnyStep.AddListener(OnStep);
+        SetIndicatorsEnabled(indicatorsEnabled);
     }
 
     private void OnDisable()
@@ -19,10 +24,10 @@ public class MM_PodControl : MonoBehaviourPlus
 
     private void OnStep(int step, int stepValue)
     {
-        UpdatePodsFromRelativeSequence();
+        if (indicatorsEnabled) UpdateIndicatorsFromRelativeSequence();
     }
 
-    private void UpdatePodsFromRelativeSequence()
+    private void UpdateIndicatorsFromRelativeSequence()
     {
         if(DebugLevel>DebugMessageLevel.MINIMAL) Debug.Log("MM_PodControl.UpdatePodsFromRelativeSequence");
         for (var i = 0; i < indicators.Length; i++)
@@ -37,6 +42,7 @@ public class MM_PodControl : MonoBehaviourPlus
 
     public void SetPodEmoji(int step, int value)
     {
+        if (!indicatorsEnabled) return;
         for (var index = 0; index < indicators.Length; index++)
         {
             var ind = indicators[index];
@@ -47,7 +53,13 @@ public class MM_PodControl : MonoBehaviourPlus
 
     public void ResetPods()
     {
+        if (!indicatorsEnabled) return;
         foreach(var ind in indicators) ind.display.SetEmoji(0);
+    }
+
+    private void SetIndicatorsEnabled(bool value)
+    {
+        foreach(var ind in indicators) ind.display.gameObject.SetActive(value);
     }
 
     [Serializable]

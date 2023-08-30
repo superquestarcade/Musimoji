@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,24 +16,18 @@ public class MusimojiBotInput : MonoBehaviourPlus
     // Selecting emoji
     [Range(0,1)]
     public float selectNewEmojiFactor = 0.5f;
-    
     public float selectEmojiDelay = 0.5f;
-    
     private float selectEmojiTimer = 0f;
-    
     private int emojiTypeTarget = 0;
 
     // Firing
     [Range(0,1)]
     public float fireOrRepressFactor = 0.8f;
-    
     public float fireDelay = 5f;
-
     private float fireTimer = 0f;
     
     // Repressing
     public float repressDelay = 5f;
-
     private float repressTimer = 0f;
 
     #endregion

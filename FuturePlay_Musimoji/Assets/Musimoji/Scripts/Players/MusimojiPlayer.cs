@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Musimoji;
 using Musimoji.Scripts;
 using UnityEngine;
@@ -28,7 +27,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     public int playerID;
     public int selectedEmoji { get; private set; } = 1;
 
-    [SerializeField] private MM_EmojiDisplay emojiDisplay;
+    [SerializeField] private MM_EmojiDisplay playerEmojiDisplay, botEmojiDisplay;
     // public SpriteRenderer emojiDisplay;
     public Sprite emptyEmoji;
     public Sprite[] emojiSprites;
@@ -145,7 +144,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     public void FireEmoji()
     {
         if (!manager.PlayerControlActive || !canFire) return;
-        if (selectedEmoji == 0) SetEmoji(Random.Range(1,emojiDisplay.EmojiDisplayCount));
+        if (selectedEmoji == 0) SetEmoji(Random.Range(1,playerEmojiDisplay.EmojiDisplayCount));
         EmojiExpressEvent.Invoke();
         mmFmodManager.OnPlayerExpressEmoji(playerID, selectedEmoji);
         canFire = false;
@@ -163,7 +162,8 @@ public class MusimojiPlayer : MonoBehaviourPlus
 
     private IEnumerator DelayDestroyFiredObject(GameObject firedObject, Action callback = null)
     {
-        emojiDisplay.SetEmoji(0);
+        playerEmojiDisplay.SetEmoji(0);
+        botEmojiDisplay.SetEmoji(0);
         yield return new WaitForSeconds(destroyFiredEmojiDelay);
         firedObjects.Remove(firedObject);
         Destroy(firedObject);
@@ -222,7 +222,8 @@ public class MusimojiPlayer : MonoBehaviourPlus
         selectedEmoji = value;
         if (selectedEmoji == 0)
         {
-            emojiDisplay.SetEmoji(0);
+            playerEmojiDisplay.SetEmoji(0);
+            botEmojiDisplay.SetEmoji(0);
             if (playerBackground == null) return;
             playerBackground.SetBgColor(Color.grey);
             return;
@@ -233,7 +234,11 @@ public class MusimojiPlayer : MonoBehaviourPlus
     private void UpdateEmojiDisplay()
     {
         if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {selectedEmoji}");
-        if(canFire) emojiDisplay.SetEmoji(selectedEmoji);
+        if (canFire)
+        {
+            playerEmojiDisplay.SetEmoji(selectedEmoji);
+            botEmojiDisplay.SetEmoji(selectedEmoji);
+        }
 
         if (playerBackground != null)
         {
@@ -249,7 +254,11 @@ public class MusimojiPlayer : MonoBehaviourPlus
         if (emojiType < 0) return;
         if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {emojiType}");
         selectedEmoji = emojiType;
-        if(canFire) emojiDisplay.SetEmoji(selectedEmoji);
+        if (canFire)
+        {
+            playerEmojiDisplay.SetEmoji(selectedEmoji);
+            botEmojiDisplay.SetEmoji(selectedEmoji);
+        }
 
         if (playerBackground == null) return;
         var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];

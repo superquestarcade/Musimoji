@@ -3393,6 +3393,18 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1173049868}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &515778413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7536692899131856830, guid: 16e02fe54da319443957d69ec22d3675,
+    type: 3}
+  m_PrefabInstance: {fileID: 99014477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aaef9a1c08746c4a9304adcd6d167f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &516108978
 GameObject:
   m_ObjectHideFlags: 0
@@ -6151,6 +6163,18 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1173049868}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1010307788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7536692899131856830, guid: 16e02fe54da319443957d69ec22d3675,
+    type: 3}
+  m_PrefabInstance: {fileID: 1850545425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aaef9a1c08746c4a9304adcd6d167f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &1010374239 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8433627884365797447, guid: 09a5da7a5ec381d4099206ad932370d3,
@@ -7815,7 +7839,8 @@ MonoBehaviour:
     emojiSprite: {fileID: 0}
   emojiRefs: {fileID: 11400000, guid: 96d94ece8ef8ec1428e811a531c79d31, type: 2}
   playerID: 2
-  emojiDisplay: {fileID: 325157503}
+  playerEmojiDisplay: {fileID: 325157503}
+  botEmojiDisplay: {fileID: 1010307788}
   emptyEmoji: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
   emojiSprites:
@@ -10474,7 +10499,8 @@ MonoBehaviour:
     emojiSprite: {fileID: 0}
   emojiRefs: {fileID: 11400000, guid: 96d94ece8ef8ec1428e811a531c79d31, type: 2}
   playerID: 1
-  emojiDisplay: {fileID: 1365692459}
+  playerEmojiDisplay: {fileID: 1365692459}
+  botEmojiDisplay: {fileID: 515778413}
   emptyEmoji: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
   emojiSprites:
@@ -12859,7 +12885,8 @@ MonoBehaviour:
     emojiSprite: {fileID: 0}
   emojiRefs: {fileID: 11400000, guid: 96d94ece8ef8ec1428e811a531c79d31, type: 2}
   playerID: 0
-  emojiDisplay: {fileID: 957328831}
+  playerEmojiDisplay: {fileID: 957328831}
+  botEmojiDisplay: {fileID: 2033558889}
   emptyEmoji: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
   emojiSprites:
@@ -15724,6 +15751,18 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 1173049868}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2033558889 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7536692899131856830, guid: 16e02fe54da319443957d69ec22d3675,
+    type: 3}
+  m_PrefabInstance: {fileID: 1393918393}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aaef9a1c08746c4a9304adcd6d167f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2033603361 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8433627885086171719, guid: 09a5da7a5ec381d4099206ad932370d3,
