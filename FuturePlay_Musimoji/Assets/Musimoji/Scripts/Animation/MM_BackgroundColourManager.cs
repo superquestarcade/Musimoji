@@ -6,21 +6,19 @@ public class MM_BackgroundColourManager : MonoBehaviourPlus
     [SerializeField] private MusimojiManager mmManager;
     [SerializeField] private MM_Sequencer mmSequencer;
     [SerializeField] private Color[] emojiColorsPlaySpace = Array.Empty<Color>(), emojiColorsBorderSpace = Array.Empty<Color>();
+    [SerializeField] private GameObject playspaceParent, borderParent;
     [SerializeField] private SpriteRenderer[] triSpriteRenderersPlaySpace, triSpriteRenderersBorderSpace;
     private System.Random rng = new System.Random();
 
-    /*public string sortingLayer;
-    public bool setSpriteRenderersToBackgroundLayer = true;*/
+    [Header("Debugging")] 
+    [SerializeField] private bool populateArrays = false;
 
-
-    /*private void OnValidate()
+    private void OnValidate()
     {
-        if (setSpriteRenderersToBackgroundLayer)
-        {
-            foreach (var sr in triSpriteRenderersBorderSpace) sr.sortingLayerName = sortingLayer;
-            foreach (var sr in triSpriteRenderersPlaySpace) sr.sortingLayerName = sortingLayer;
-        }
-    }*/
+        if (!populateArrays) return;
+        triSpriteRenderersPlaySpace = playspaceParent.GetComponentsInChildren<SpriteRenderer>();
+        triSpriteRenderersBorderSpace = borderParent.GetComponentsInChildren<SpriteRenderer>();
+    }
 
     private void Start()
     {

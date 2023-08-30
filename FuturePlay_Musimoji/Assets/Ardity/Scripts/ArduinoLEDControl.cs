@@ -82,6 +82,7 @@ public class ArduinoLEDControl : MonoBehaviour
     // ------------------------------------------------------------------------
     private void OnDisable()
     {
+        SetState(LEDPlayState.STANDBY);
         // If there is a user-defined tear-down function, execute it before
         // closing the underlying COM port.
         if (userDefinedTearDownFunction != null)
@@ -163,27 +164,90 @@ public class ArduinoLEDControl : MonoBehaviour
     public static void SetState(LEDPlayState gameState)
     {
         //currentGameState = gameState;
-
-        byte sb = ConvertStateIntToASCII((int)gameState);
-        Debug.Log("changing state to = " + gameState + " " + (char)sb);
+        var sb = (byte) gameState;
+        Debug.Log("changing state to " + gameState + " " + (char)sb);
         if ((char)sb != '-')
             SendSerialMessage(new byte[] { sb, 32 });
     }
-
-    private static byte ConvertStateIntToASCII(int state)
+    
+    public static LEDPlayState[] GetAllPlayStates = 
     {
-        switch (state)
-        {
-            case 0: //standby
-                return 119;
-            case 1: //attract
-                return 120;
-            case 2: //play
-                return 121;
-            case 3: //win
-                return 122;
-        }
-        return 45;
+        LEDPlayState.STATIC_YELLOW,
+        LEDPlayState.STATIC_GREEN,
+        LEDPlayState.STATIC_TEAL,
+        LEDPlayState.STATIC_LIGHTBLUE,
+        LEDPlayState.STATIC_BLUE,
+        LEDPlayState.STATIC_VIOLET,
+        LEDPlayState.STATIC_RED,
+        LEDPlayState.STATIC_ORANGE,
+        LEDPlayState.BLINKING_YELLOW,
+        LEDPlayState.BLINKING_GREEN,
+        LEDPlayState.BLINKING_TEAL,
+        LEDPlayState.BLINKING_LIGHTBLUE,
+        LEDPlayState.BLINKING_BLUE,
+        LEDPlayState.BLINKING_VIOLET,
+        LEDPlayState.BLINKING_RED,
+        LEDPlayState.BLINKING_ORANGE,
+        LEDPlayState.BREATHING_YELLOW,
+        LEDPlayState.BREATHING_GREEN,
+        LEDPlayState.BREATHING_TEAL,
+        LEDPlayState.BREATHING_LIGHTBLUE,
+        LEDPlayState.BREATHING_BLUE,
+        LEDPlayState.BREATHING_VIOLET,
+        LEDPlayState.BREATHING_RED,
+        LEDPlayState.BREATHING_ORANGE,
+        LEDPlayState.STANDBY,
+        LEDPlayState.ATTRACT,
+        LEDPlayState.CHAOS,
+        LEDPlayState.PLAYING
+    };
+
+    public static LEDPlayState GetStaticStateFromEmoji(int emojiIndex)
+    {
+        // emojiIndex = 0 is empty/ null
+        if (emojiIndex is < 1 or > 8) return LEDPlayState.NULL;
+        // Static colours:
+        // STATIC_YELLOW = 49,
+        // STATIC_GREEN = 50,
+        // STATIC_TEAL = 51,
+        // STATIC_LIGHTBLUE = 52,
+        // STATIC_BLUE = 53,
+        // STATIC_VIOLET = 54,
+        // STATIC_RED = 55,
+        // STATIC_ORANGE = 56,
+        return (LEDPlayState) 48 + emojiIndex;
+    }
+    
+    public static LEDPlayState GetBlinkingStateFromEmoji(int emojiIndex)
+    {
+        // emojiIndex = 0 is empty/ null
+        if (emojiIndex is < 1 or > 8) return LEDPlayState.NULL;
+        // Blinking colours:
+        // BLINKING_YELLOW = 97,
+        // BLINKING_GREEN = 98,
+        // BLINKING_TEAL = 99,
+        // BLINKING_LIGHTBLUE = 100,
+        // BLINKING_BLUE = 101,
+        // BLINKING_VIOLET = 102,
+        // BLINKING_RED = 103,
+        // BLINKING_ORANGE = 104,
+        return (LEDPlayState) 96 + emojiIndex;
+    }
+    
+    public static LEDPlayState GetBreathingStateFromEmoji(int emojiIndex)
+    {
+        // emojiIndex = 0 is empty/ null
+        if (emojiIndex is < 1 or > 8) return LEDPlayState.NULL;
+        // Breathing colours:
+        // BREATHING_YELLOW = 105,
+        // BREATHING_GREEN = 106,
+        // BREATHING_TEAL = 107,
+        // BREATHING_LIGHTBLUE = 108,
+        // BREATHING_BLUE = 109,
+        // BREATHING_VIOLET = 110,
+        // BREATHING_RED = 111,
+        // BREATHING_ORANGE = 112,
+        return (LEDPlayState) 104 + emojiIndex;
     }
 
     private bool InitializeSingleton()
@@ -210,19 +274,42 @@ public class ArduinoLEDControl : MonoBehaviour
 
         return true;
     }
-    
-    //chars are: 
-    //STATES:   ASCII v Normal
-    //- Standby = 119 aka 'w'
-    //- Attract = 120 aka 'x'
-    //- Playing = 121 aka 'y'
-    //- Win     = 122 aka 'z'
-
 }
 public enum LEDPlayState
 {
-    STANDBY,
-    ATTRACT,
-    PLAYING,
-    WIN
+    NULL = 0,
+    // Static colours:
+    STATIC_YELLOW = 49,
+    STATIC_GREEN = 50,
+    STATIC_TEAL = 51,
+    STATIC_LIGHTBLUE = 52,
+    STATIC_BLUE = 53,
+    STATIC_VIOLET = 54,
+    STATIC_RED = 55,
+    STATIC_ORANGE = 56,
+    
+    // Blinking colours:
+    BLINKING_YELLOW = 97,
+    BLINKING_GREEN = 98,
+    BLINKING_TEAL = 99,
+    BLINKING_LIGHTBLUE = 100,
+    BLINKING_BLUE = 101,
+    BLINKING_VIOLET = 102,
+    BLINKING_RED = 103,
+    BLINKING_ORANGE = 104,
+    
+    // Breathing colours:
+    BREATHING_YELLOW = 105,
+    BREATHING_GREEN = 106,
+    BREATHING_TEAL = 107,
+    BREATHING_LIGHTBLUE = 108,
+    BREATHING_BLUE = 109,
+    BREATHING_VIOLET = 110,
+    BREATHING_RED = 111,
+    BREATHING_ORANGE = 112,
+    
+    STANDBY = 119,
+    ATTRACT = 120,
+    CHAOS = 121,
+    PLAYING = 122,
 }

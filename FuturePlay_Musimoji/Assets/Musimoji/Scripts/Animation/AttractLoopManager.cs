@@ -3,9 +3,8 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;
 
-public class AttractLoopManager : MonoBehaviour
+public class AttractLoopManager : MonoBehaviourPlus
 {
-    public bool debugMessages = false;
     [SerializeField] private VideoPlayer videoPlayer;
     public UnityEvent OnStartGame, OnStartAttract;
     private bool attractStateActive = true;
@@ -38,7 +37,7 @@ public class AttractLoopManager : MonoBehaviour
 
     private void StartGame()
     {
-        if(debugMessages) Debug.Log("AttractLoopManager.StartGame");
+        if(DebugMessages) Debug.Log("AttractLoopManager.StartGame");
         videoPlayer.Stop();
         OnStartGame?.Invoke();
         attractStateActive = false;
@@ -46,8 +45,7 @@ public class AttractLoopManager : MonoBehaviour
 
     public void SetAttractState()
     {
-        if(debugMessages) Debug.Log("AttractLoopManager.SetAttractState");
-        ArduinoLEDControl.SetState(LEDPlayState.ATTRACT);
+        if(DebugMessages) Debug.Log("AttractLoopManager.SetAttractState");
         videoPlayer.Play();
         attractStateActive = true;
         OnStartAttract?.Invoke();

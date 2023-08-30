@@ -63,7 +63,7 @@ namespace Musimoji
     
         public void OnMidiNoteDown(Note note, float velocity)
         {
-            if(DebugMessages) Debug.Log($"MusimojiInput.OnMidiNoteDown (player {player.playerID})");
+            if(DebugMessages) Debug.Log($"MusimojiInput.OnMidiNoteDown player {player.playerID}, note {note}");
             player.InitializeHuman();
             player.OnNoteDown(note, velocity);
             player.ResetBotTimer();

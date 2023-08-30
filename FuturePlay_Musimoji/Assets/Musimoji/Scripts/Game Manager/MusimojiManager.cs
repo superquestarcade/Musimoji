@@ -51,11 +51,11 @@ public class MusimojiManager : MonoBehaviourPlus
     [SerializeField] private bool arduinoLedControlEnabled = true;
     
     [Header("Events")]
-    public UnityEvent<int> OnWin;
+    public UnityEvent<int> OnWinning, OnWin;
     public UnityEvent<float> OnWinIntensity;
     public UnityEvent OnStartGame;
     public UnityEvent OnEndGame;
-    public UnityEvent<int> OnRepressEmoji;
+    public UnityEvent<int> OnEmojiHit, OnRepressEmoji;
     
     #endregion
 
@@ -150,6 +150,7 @@ public class MusimojiManager : MonoBehaviourPlus
         var playerStepIndex = PlayerStepIndex(playerID);
         if (currentSequenceData[playerStepIndex] == emojiId) return;
         SetSequenceStep(playerStepIndex, emojiId);
+        OnEmojiHit?.Invoke(emojiId);
         if(DebugMessages) Debug.Log($"MusimojiManager.PlayerFireEmoji player {playerID}, " +
                                     $"emoji {emojiId}, slot {playerStepIndex}");
         CheckWinCondition(playerStepIndex, SetWinningRun);
@@ -297,9 +298,9 @@ public class MusimojiManager : MonoBehaviourPlus
 
     private void ResetGame()
     {
+        EndGame();
         winEmoji.size = Vector2.one;
         winEmoji.enabled = false;
-        if(arduinoLedControlEnabled) ArduinoLEDControl.SetState(LEDPlayState.PLAYING);
         sequencer.Restart();
         currentSequenceData = new int[sequencer.SequenceStepCount];
         SetAudioSequenceData();
@@ -364,13 +365,10 @@ public class MusimojiManager : MonoBehaviourPlus
             Debug.LogError($"MusiMojiManager.CheckWinCondition sequenceIndex {sequenceIndex} out of range {sequencer.SequenceStepCount}");
             return false;
         }
-        
         // Find 2 steps before fired step so we can check before & after
         var secondIndex = PreviousIndexInSequenceData(currentSequenceData, sequenceIndex);
         var firstIndex = PreviousIndexInSequenceData(currentSequenceData, secondIndex);
-
         if(CheckWinTriplet(currentSequenceData, firstIndex, secondIndex, sequenceIndex, winCallback)) return true;
-        
         for (var s = 0; s < 2; s++)
         {
             var thisIndex = NextIndexInSequenceData(currentSequenceData, firstIndex + s);
@@ -379,10 +377,8 @@ public class MusimojiManager : MonoBehaviourPlus
             
             if(CheckWinTriplet(currentSequenceData, thisIndex, nextIndex, thirdIndex, winCallback)) return true;
         }
-        
         if(DebugMessages) Debug.Log($"MusiMojiManager.CheckWinCondition sequenceIndex {sequenceIndex} is not a winner");
         CheckWinningRun(sequenceIndex);
-
         return false;
     }
 
@@ -390,19 +386,13 @@ public class MusimojiManager : MonoBehaviourPlus
     {
         if(DebugMessages) Debug.Log($"PredictWinCondition step index {sequenceIndex} emoji {emojiId}");
         if(sequenceIndex < 0 || sequenceIndex >= currentSequenceData.Length) return false;
-
         var predictedSequenceData = new int[currentSequenceData.Length];
-        
         Array.Copy(currentSequenceData, predictedSequenceData, currentSequenceData.Length);
-        
         predictedSequenceData[sequenceIndex] = emojiId;
-        
         // Find 2 steps before fired step so we can check before & after
         var secondIndex = PreviousIndexInSequenceData(predictedSequenceData, sequenceIndex);
         var firstIndex = PreviousIndexInSequenceData(predictedSequenceData, secondIndex);
-
         if(CheckWinTriplet(predictedSequenceData, firstIndex, secondIndex, sequenceIndex)) return true;
-        
         for (var s = 0; s < 2; s++)
         {
             var thisIndex = NextIndexInSequenceData(predictedSequenceData, firstIndex + s);
@@ -411,18 +401,14 @@ public class MusimojiManager : MonoBehaviourPlus
             
             if(CheckWinTriplet(predictedSequenceData, thisIndex, nextIndex, thirdIndex)) return true;
         }
-
         return false;
     }
 
     private bool CheckWinTriplet(int[] sequenceData, int a, int b, int c, Action<int,int,int,int> winCallback = null)
     {
         if(DebugMessages) Debug.Log($"CheckWinTriplet indexes {a}, {b}, {c}");
-
         if (sequenceData[a] == 0) return false;
-        
         if (sequenceData[a] != sequenceData[b] || sequenceData[b] != sequenceData[c]) return false;
-        
         winCallback?.Invoke(sequenceData[a], a, b, c);
         return true;
 
@@ -438,14 +424,12 @@ public class MusimojiManager : MonoBehaviourPlus
             StopWinning();
             return;
         }
-        
         if(DebugMessages) Debug.Log($"CheckWinningRun step {index}");
     }
 
     private void CheckWinningRunType()
     {
         if (winningSequence == null) return;
-        
         foreach (var w in winningSequence)
         {
             if (winType > 0 && currentSequenceData[w] != winType) continue;
@@ -454,40 +438,32 @@ public class MusimojiManager : MonoBehaviourPlus
             currentSequenceData[w] = 0;
             sequenceStepDisplays[w].SetEmoji(0);
         }
-
         StopWinning();
     }
 
     private void StopWinning()
     {
         if(DebugMessages) Debug.Log($"StopWinning array clear {string.Join(",", winningSequence)}");
-        
         winningSequence = Array.Empty<int>();
-        
         winEmoji.enabled = false;
         winEmoji.transform.localScale = Vector2.one;
         isWinning = false;
         winTimer = 0f;
+        OnWinning.Invoke(0);
     }
 
     private void SetWinningRun(int winEmojiType, int a, int b, int c)
     {
         if(winEmojiType==0) return;
-        
         CheckWinningRunType();
-        
         if (winningSequence is {Length: 3} && 
             winningSequence[0] == a && winningSequence[1] == b && winningSequence[2] == c) return;
-
         winType = winEmojiType;
-        
+        OnWinning.Invoke(winType);
         isWinning = true;
         winTimer = 0f;
-                
         winningSequence = new[] {a, b, c};
-        
         if(DebugMessages) Debug.Log($"CheckWinCondition WINNING! {string.Join(", ", winningSequence)} type {winType}");
-
         winEmoji.sprite = emojiSprites[winType-1];
         winEmoji.enabled = true;
     }
@@ -495,22 +471,16 @@ public class MusimojiManager : MonoBehaviourPlus
     private void IsWinning()
     {
         if (!isWinning) return;
-        
         OnWinIntensity?.Invoke(winTimer/winDuration);
-
         if (winTimer >= winDuration)
         {
             WinComplete();
             OnWinIntensity?.Invoke(0);
             return;
         }
-
         var winFactor = winTimer / winDuration;
-
         var winScale = winEmojiStartScale + ((winEmojiEndScale - winEmojiStartScale) * winFactor);
-        
         winEmoji.transform.localScale = Vector2.one * winScale;
-
         winTimer += Time.deltaTime;
     }
 
@@ -518,7 +488,6 @@ public class MusimojiManager : MonoBehaviourPlus
     {
         if(DebugMessages) Debug.Log($"WinComplete");
         PlayerControlActive = false;
-        if(arduinoLedControlEnabled) ArduinoLEDControl.SetState(LEDPlayState.WIN);
         OnWin?.Invoke(winType);
         isWinning = false;
         winTimer = 0f;
@@ -528,9 +497,7 @@ public class MusimojiManager : MonoBehaviourPlus
     private IEnumerator ResetAfterWin()
     {
         yield return new WaitForSeconds(resetAfterWin);
-
         ResetGame();
-        
         EndGame();
     }
 
