@@ -6558,6 +6558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063119509}
   - component: {fileID: 1063119510}
+  - component: {fileID: 1063119511}
   m_Layer: 0
   m_Name: FmodChangeEmitter
   m_TagString: Untagged
@@ -6595,23 +6596,54 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -329090719
-      Data2: 1193407417
-      Data3: 521480844
-      Data4: -1253562612
-    Path: event:/Action_Change
+      Data1: 1315232713
+      Data2: 1217517525
+      Data3: -1788518775
+      Data4: 1616116940
+    Path: event:/Key_P3
   Event: 
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 0
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   Params:
-  - Name: Player
-    Value: 3
+  - Name: Note
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &1063119511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063119508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d113891e72a7ac479cc1b8707b1e74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugLevel: 0
+  eventEmitter: {fileID: 1063119510}
+  noteEmojiRefs:
+  - emojiIndex: 1
+    noteIndex: 6
+  - emojiIndex: 2
+    noteIndex: 2
+  - emojiIndex: 3
+    noteIndex: 3
+  - emojiIndex: 4
+    noteIndex: 1
+  - emojiIndex: 5
+    noteIndex: 4
+  - emojiIndex: 6
+    noteIndex: 0
+  - emojiIndex: 7
+    noteIndex: 5
+  - emojiIndex: 8
+    noteIndex: 7
 --- !u!212 &1064814920 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8433627885226251051, guid: 09a5da7a5ec381d4099206ad932370d3,
@@ -7914,10 +7946,10 @@ MonoBehaviour:
   EmojiChangeEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1063119510}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 1063119511}
+        m_TargetAssemblyTypeName: MM_KeyNoteEmitter, Assembly-CSharp
+        m_MethodName: OnSetNote
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8276,6 +8308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278854227}
   - component: {fileID: 1278854228}
+  - component: {fileID: 1278854229}
   m_Layer: 0
   m_Name: FmodChangeEmitter
   m_TagString: Untagged
@@ -8313,23 +8346,54 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -329090719
-      Data2: 1193407417
-      Data3: 521480844
-      Data4: -1253562612
-    Path: event:/Action_Change
+      Data1: 1900357275
+      Data2: 1185624760
+      Data3: 353185157
+      Data4: -41402964
+    Path: event:/Key_P2
   Event: 
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 0
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   Params:
-  - Name: Player
-    Value: 2
+  - Name: Note
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &1278854229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278854226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d113891e72a7ac479cc1b8707b1e74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugLevel: 0
+  eventEmitter: {fileID: 1278854228}
+  noteEmojiRefs:
+  - emojiIndex: 1
+    noteIndex: 6
+  - emojiIndex: 2
+    noteIndex: 2
+  - emojiIndex: 3
+    noteIndex: 3
+  - emojiIndex: 4
+    noteIndex: 1
+  - emojiIndex: 5
+    noteIndex: 4
+  - emojiIndex: 6
+    noteIndex: 0
+  - emojiIndex: 7
+    noteIndex: 5
+  - emojiIndex: 8
+    noteIndex: 7
 --- !u!212 &1279158900 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8433627885612772911, guid: 09a5da7a5ec381d4099206ad932370d3,
@@ -10541,10 +10605,10 @@ MonoBehaviour:
   EmojiChangeEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1278854228}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 1278854229}
+        m_TargetAssemblyTypeName: MM_KeyNoteEmitter, Assembly-CSharp
+        m_MethodName: OnSetNote
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12926,10 +12990,10 @@ MonoBehaviour:
   EmojiChangeEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1865583550}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
+      - m_Target: {fileID: 1865583551}
+        m_TargetAssemblyTypeName: MM_KeyNoteEmitter, Assembly-CSharp
+        m_MethodName: OnSetNote
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14505,6 +14569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865583549}
   - component: {fileID: 1865583550}
+  - component: {fileID: 1865583551}
   m_Layer: 0
   m_Name: FmodChangeEmitter
   m_TagString: Untagged
@@ -14542,23 +14607,54 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -329090719
-      Data2: 1193407417
-      Data3: 521480844
-      Data4: -1253562612
-    Path: event:/Action_Change
+      Data1: 140140339
+      Data2: 1180452323
+      Data3: -1544577361
+      Data4: 211023365
+    Path: event:/Key_P1
   Event: 
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 0
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   Params:
-  - Name: Player
-    Value: 1
+  - Name: Note
+    Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &1865583551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865583548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d113891e72a7ac479cc1b8707b1e74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugLevel: 3
+  eventEmitter: {fileID: 1865583550}
+  noteEmojiRefs:
+  - emojiIndex: 1
+    noteIndex: 6
+  - emojiIndex: 2
+    noteIndex: 2
+  - emojiIndex: 3
+    noteIndex: 3
+  - emojiIndex: 4
+    noteIndex: 1
+  - emojiIndex: 5
+    noteIndex: 4
+  - emojiIndex: 6
+    noteIndex: 0
+  - emojiIndex: 7
+    noteIndex: 5
+  - emojiIndex: 8
+    noteIndex: 7
 --- !u!212 &1865795593 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8433627884147181316, guid: 09a5da7a5ec381d4099206ad932370d3,

@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{e55cf3bb-9a31-413a-962f-cabe54e80b8e}</destination>
 		</relationship>
+		<relationship name="parameters">
+			<destination>{096eb5e5-773d-43e7-b289-84242a9c0ca0}</destination>
+		</relationship>
 		<relationship name="banks">
 			<destination>{a47597c7-89a0-45e6-8d19-ed1efa6242a4}</destination>
 		</relationship>
@@ -88,6 +91,11 @@
 		</relationship>
 		<relationship name="markers">
 			<destination>{cf2b8876-6eaf-4df3-9962-63e65f8ee22a}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterProxy" id="{096eb5e5-773d-43e7-b289-84242a9c0ca0}">
+		<relationship name="preset">
+			<destination>{8979b880-eb71-4735-9afc-ce67d7e09d2b}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{e4ba5803-85b5-4c6e-9208-b1396b212042}">
@@ -359,6 +367,7 @@
 			<destination>{77fcea8c-6675-43c4-a430-77f852d982e9}</destination>
 			<destination>{61c7bb47-19b6-44b8-b0a2-9d6747ad368c}</destination>
 			<destination>{875ebce8-8f38-467a-8154-2aa4000be965}</destination>
+			<destination>{c1da26eb-deed-4008-93ac-89da159c7ffe}</destination>
 		</relationship>
 	</object>
 	<object class="LimiterEffect" id="{dd949502-90e4-4fe2-8fd5-b25a52339384}">
@@ -400,6 +409,20 @@
 		</property>
 		<property name="value">
 			<value>-80</value>
+		</property>
+		<property name="curveShape">
+			<value>0.157890603</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{c1da26eb-deed-4008-93ac-89da159c7ffe}">
+		<property name="position">
+			<value>0.20114942528735633</value>
+		</property>
+		<property name="value">
+			<value>-1</value>
+		</property>
+		<property name="curveShape">
+			<value>-0.167150006</value>
 		</property>
 	</object>
 </objects>
