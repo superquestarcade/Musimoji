@@ -1,29 +1,54 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class LEDSwitcher : MonoBehaviour
+public class LEDSwitcher : MonoBehaviourPlus
 {
     private int currentState;
-    private int stateCount;
+    private LEDPlayState[] allStates;
+    private int StateCount => allStates.Length;
 
     private void Start()
     {
         Debug.LogWarning($"LEDSwitcher.Start {currentState}");
-        ArduinoLEDControl.SetState((LEDPlayState) currentState);
-        stateCount = Enum.GetValues(typeof(LEDPlayState)).Length;
+        allStates = ArduinoLEDControl.GetAllPlayStates;
+        ArduinoLEDControl.SetState(allStates[currentState]);
     }
 
     public void NextState()
     {
         currentState++;
+        if (currentState >= StateCount - 1) currentState = 0;
         Debug.LogWarning($"LEDSwitcher.NextState {currentState}");
-        if (currentState >= stateCount - 1) currentState = 0;
-        ArduinoLEDControl.SetState((LEDPlayState) currentState);
+        ArduinoLEDControl.SetState(allStates[currentState]);
+    }
+
+    public void PreviousState()
+    {
+        currentState--;
+        if (currentState < 0) currentState = StateCount-1;
+        Debug.LogWarning($"LEDSwitcher.NextState {currentState}");
+        ArduinoLEDControl.SetState(allStates[currentState]);
     }
 
     public void SetState(int newState)
     {
         currentState = newState;
-        ArduinoLEDControl.SetState((LEDPlayState) currentState);
+        ArduinoLEDControl.SetState(allStates[currentState]);
     }
+    
+    #region Input
+
+    public void OnNextState(InputAction.CallbackContext callbackContext)
+    {
+        if (!callbackContext.started) return;
+        NextState();
+    }
+
+    public void OnPreviousState(InputAction.CallbackContext callbackContext)
+    {
+        if (!callbackContext.started) return;
+        PreviousState();
+    }
+    #endregion
 }

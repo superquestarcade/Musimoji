@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 
 public class MusimojiPlayer : MonoBehaviourPlus
 {
+    #region Parameters
     [Header("Settings")]
     public MusimojiManager manager;
     [SerializeField] private MM_FmodManager mmFmodManager;
@@ -27,7 +28,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     public int playerID;
     public int selectedEmoji { get; private set; } = 1;
 
-    [FormerlySerializedAs("playerEmojiDisplay")] [SerializeField] private MM_EmojiDisplay emojiDisplay;
+    [SerializeField] private MM_EmojiDisplay emojiDisplay;
     // public SpriteRenderer emojiDisplay;
     public Sprite emptyEmoji;
     public Sprite[] emojiSprites;
@@ -53,6 +54,9 @@ public class MusimojiPlayer : MonoBehaviourPlus
 
     public UnityEvent EmojiExpressEvent, EmojiRepressEvent, EmojiHitEvent, EmojiReloadEvent;
     public UnityEvent<int> EmojiChangeEvent;
+    #endregion
+    
+    #region Unity Functions
 
     private void Start()
     {
@@ -73,6 +77,8 @@ public class MusimojiPlayer : MonoBehaviourPlus
     {
         manager.OnRepressEmoji.RemoveListener(OnRepressEmoji);
     }
+    
+    #endregion
 
     #region Player Management
 
@@ -164,8 +170,8 @@ public class MusimojiPlayer : MonoBehaviourPlus
         EmojiHitEvent?.Invoke();
         callback?.Invoke();
         yield return new WaitForSeconds(fireAgainDelay);
-        SetEmoji(selectedEmoji);
         canFire = true;
+        SetEmoji(selectedEmoji);
         EmojiReloadEvent?.Invoke();
     }
 
@@ -227,7 +233,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     private void UpdateEmojiDisplay()
     {
         if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {selectedEmoji}");
-        emojiDisplay.SetEmoji(selectedEmoji);
+        if(canFire) emojiDisplay.SetEmoji(selectedEmoji);
 
         if (playerBackground != null)
         {
@@ -243,7 +249,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
         if (emojiType < 0) return;
         if(DebugMessages) Debug.Log($"SetEmoji Player {playerID}: Selecting emoji {emojiType}");
         selectedEmoji = emojiType;
-        emojiDisplay.SetEmoji(selectedEmoji);
+        if(canFire) emojiDisplay.SetEmoji(selectedEmoji);
 
         if (playerBackground == null) return;
         var bgColour = playerBgColourMultiplier * manager.EmojiColors[selectedEmoji - 1];

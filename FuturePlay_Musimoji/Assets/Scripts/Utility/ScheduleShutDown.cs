@@ -22,10 +22,8 @@ public class ScheduleShutDown : MonoBehaviourPlus
     private void Update()
     {
         if (!shutDownAfterTime || DateTime.Now.TimeOfDay < shutDownTime.TimeOfDay) return;
-        
         Debug.LogWarning("ScheduleShutDown shutting down based on scheduled time");
-        
-        if(arduinoLedControlEnabled) ArduinoLEDControl.SetState(LEDPlayState.STANDBY);
+        // if(arduinoLedControlEnabled) ArduinoLEDControl.SetState(LEDPlayState.STANDBY);
 
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;

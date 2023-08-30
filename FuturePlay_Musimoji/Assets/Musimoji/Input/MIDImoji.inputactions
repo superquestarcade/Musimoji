@@ -85,6 +85,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NextLightingMode",
+                    "type": "Button",
+                    "id": "c79017d1-58b3-4b99-93ce-b0c3d7459c4f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PreviousLightingMode",
+                    "type": "Button",
+                    "id": "3facee8d-c023-4912-bd87-a9152978efda",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -184,6 +202,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Player1 Button3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff0fb218-e9a2-4382-9dda-bba4547b2dce",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextLightingMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f589b7df-d5aa-47e0-b98c-62ae965b47eb",
+                    "path": "<Keyboard>/numpadMinus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousLightingMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

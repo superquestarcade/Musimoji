@@ -20,7 +20,7 @@ MonoBehaviour:
     noteGroup: {fileID: 11400000, guid: edd029a5764ddd843807e4ee156f7993, type: 2}
     emojiSprite: {fileID: 21300000, guid: 88a8e8830f680c04a98620cd54107899, type: 3}
   - index: 6
-    noteGroup: {fileID: 11400000, guid: dcd003473228e7a4499bb42f0e72631a, type: 2}
+    noteGroup: {fileID: 11400000, guid: 3639e6ca541cd5a459f7298bd4083ba9, type: 2}
     emojiSprite: {fileID: 21300000, guid: 58a975f6b426f0c4782cdbd57beff979, type: 3}
   - index: 4
     noteGroup: {fileID: 11400000, guid: e4b523991909b1d438558d16612248f4, type: 2}
@@ -34,3 +34,6 @@ MonoBehaviour:
   - index: 5
     noteGroup: {fileID: 11400000, guid: de1d35a72f6d1ef45a33ae66b4a9c07a, type: 2}
     emojiSprite: {fileID: 21300000, guid: 5e747544aeef4d3468c792b41edb6703, type: 3}
+  - index: 8
+    noteGroup: {fileID: 11400000, guid: 234214ba1b4739f4d8d3a20661ac1728, type: 2}
+    emojiSprite: {fileID: 21300000, guid: 4400f72feaedb984fafcdd3a929a329b, type: 3}
