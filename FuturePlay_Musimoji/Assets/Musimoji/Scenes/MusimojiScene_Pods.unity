@@ -5738,7 +5738,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 279880043}
         m_TargetAssemblyTypeName: MM_PodControl, Assembly-CSharp
-        m_MethodName: ResetPods
+        m_MethodName: ResetIndicators
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

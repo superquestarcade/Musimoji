@@ -10,19 +10,19 @@ public class MM_Intro : MonoBehaviourPlus
     public float slideDuration = 3f;
     public UnityEvent OnStartGame;
 
-    [SerializeField] private bool introActive = false;
-    private float introTimer;
+    [SerializeField] protected bool introActive = false;
+    protected float introTimer;
 
-    private int activeSlideIndex = 0;
-    [SerializeField] private int currentSlide = 0;
+    protected int activeSlideIndex = 0;
+    [SerializeField] protected int currentSlide = 0;
 
-    private void Start()
+    protected virtual void Start()
     {
         if (!introActive) SlideShowComplete();
     }
 
     // Update is called once per frame
-    private void Update()
+    protected virtual void Update()
     {
         if (!introActive) return;
         introTimer += Time.deltaTime;
@@ -32,7 +32,7 @@ public class MM_Intro : MonoBehaviourPlus
         if(activeSlideIndex!=currentSlide) SetActiveSlide(currentSlide);
     }
     
-    public void StartIntro()
+    public virtual void StartIntro()
     {
         if(DebugMessages) Debug.Log("MM_Intro.StartIntro");
         introActive = true;
@@ -40,14 +40,14 @@ public class MM_Intro : MonoBehaviourPlus
         introCanvas.gameObject.SetActive(true);
     }
 
-    private void SetActiveSlide(int slideIndex)
+    protected virtual void SetActiveSlide(int slideIndex)
     {
         if(DebugMessages) Debug.Log($"MM_Intro.SetActiveSlide setting active slide {slideIndex}");
         for(var s=0;s<introSlides.Length;s++) introSlides[s].gameObject.SetActive(s==slideIndex);
         activeSlideIndex = slideIndex;
     }
 
-    private void SlideShowComplete()
+    protected virtual void SlideShowComplete()
     {
         if(DebugMessages) Debug.Log("MM_Intro.SlideShowComplete");
         introActive = false;

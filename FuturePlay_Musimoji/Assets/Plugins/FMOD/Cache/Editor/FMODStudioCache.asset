@@ -847,10 +847,10 @@ MonoBehaviour:
   Path: ../MusiMojiFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638290032981727184
+  lastModified: 638301137143400360
   FileSizes:
   - Name: Desktop
-    Value: 19591232
+    Value: 22467840
   Exists: 1
 --- !u!114 &-1420290634012737910
 MonoBehaviour:
@@ -993,11 +993,12 @@ MonoBehaviour:
   - {fileID: 4832366980246390049}
   - {fileID: 4034683867845851431}
   - {fileID: -3264380896428704111}
+  - {fileID: 3963326592129981742}
   MasterBanks:
   - {fileID: -1559844297427545097}
   StringsBanks:
   - {fileID: 7883605320144414891}
-  cacheTime: 638290032981767284
+  cacheTime: 638301137143440287
   cacheVersion: 131591
 --- !u!114 &593096362594807003
 MonoBehaviour:
@@ -1525,6 +1526,30 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &3963326592129981742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/secret bass switch
+  m_EditorClassIdentifier: 
+  Name: secret bass switch
+  StudioPath: parameter:/secret bass switch
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3654631984
+    data2: 3978127535
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &4034683867845851431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,7 +1563,7 @@ MonoBehaviour:
   m_Name: parameter:/Sadness
   m_EditorClassIdentifier: 
   Name: Sadness
-  StudioPath: parameter:/Sadness
+  StudioPath: parameter:/sadness
   Min: 0
   Max: 1
   Default: 0
@@ -1913,7 +1938,7 @@ MonoBehaviour:
   m_Name: parameter:/Surprise
   m_EditorClassIdentifier: 
   Name: Surprise
-  StudioPath: parameter:/Surprise
+  StudioPath: parameter:/surprise
   Min: 0
   Max: 1
   Default: 0
@@ -1963,10 +1988,10 @@ MonoBehaviour:
   Path: ../MusiMojiFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638290032981767284
+  lastModified: 638301137143440287
   FileSizes:
   - Name: Desktop
-    Value: 2914
+    Value: 2962
   Exists: 1
 --- !u!114 &8196377561602814639
 MonoBehaviour:

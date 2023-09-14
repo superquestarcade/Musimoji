@@ -12,5 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8c216025a243fabd874c2049e00cc4, type: 3}
   m_Name: PodData_0
   m_EditorClassIdentifier: 
-  deviceName: 
-  deviceID: 
+  photonDeviceData:
+  - deviceName: Pod_1
+    deviceID: 2f002f001547363332363732
+  - deviceName: Pod_2
+    deviceID: 360042000e47393132343438
+  - deviceName: Pod_3
+    deviceID: 270033000b47313037363132
+  - deviceName: Pod_4
+    deviceID: 390038000947313037363132
+  - deviceName: Pod_5
+    deviceID: 39003c000947313037363132
+  - deviceName: Pod_6
+    deviceID: 270031000e47313037363132
+  - deviceName: Pod_7
+    deviceID: 270028000b47363330353437
+  - deviceName: Pod_8
+    deviceID: 290031000947313037363132

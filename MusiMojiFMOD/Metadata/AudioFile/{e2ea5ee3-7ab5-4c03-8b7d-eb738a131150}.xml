@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e2ea5ee3-7ab5-4c03-8b7d-eb738a131150}">
+		<property name="assetPath">
+			<value>fear_bass.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>175.95733333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ba5b55ab-40b4-4507-b426-e4e5431372d7}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -59,6 +59,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
 
     private void Start()
     {
+        InitializeBot();
         UpdateEmojiDisplay();
     }
 
@@ -200,7 +201,7 @@ public class MusimojiPlayer : MonoBehaviourPlus
     
     public void NextEmoji()
     {
-        if (!manager.PlayerControlActive || !canFire) return;
+        if (!manager.PlayerControlActive) return;
         selectedEmoji += 1;
         if (selectedEmoji <= 0) selectedEmoji = emojiSprites.Length;
         if (selectedEmoji > emojiSprites.Length) selectedEmoji = 1;

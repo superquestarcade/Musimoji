@@ -49,6 +49,8 @@ public class MusimojiManager : MonoBehaviourPlus
     
     [Header("Arduino LED Control")]
     [SerializeField] private bool arduinoLedControlEnabled = true;
+
+    public bool LightingEnabled => arduinoLedControlEnabled;
     
     [Header("Events")]
     public UnityEvent<int> OnWinning, OnWin;
@@ -63,7 +65,7 @@ public class MusimojiManager : MonoBehaviourPlus
 
     private void Awake()
     {
-        if (!arduinoLedControlEnabled) ArduinoLEDControl.Singleton.enabled = false;
+        // if (!arduinoLedControlEnabled) ArduinoLEDControl.Singleton.enabled = false;
     }
 
     // Start is called before the first frame update

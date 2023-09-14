@@ -9,6 +9,7 @@ namespace Musimoji
     public class MinisNoteInputMapper : MonoBehaviourPlus
     {
         private List<MidiDevice> currentDevices = new();
+        [SerializeField] private string[] deviceIds;
         public Action<int, Note, float> OnNoteDown;
         public Action<int, Note> OnNoteUp;
 
@@ -58,7 +59,7 @@ namespace Musimoji
         {
             if(DebugMessages)Debug.Log(string.Format(
                 // "Adding device ch:{0} player: {1} dev:'{2}'",
-                "Adding device ch:{0} dev:'{1}'",
+                "MinisNoteInputMapper.OnAddMidiDevice Adding device ch:{0} dev:'{1}'",
                 midiDevice.channel,
                 // DeviceChannelToPlayerId(midiDevice.channel),
                 midiDevice.description.product
@@ -73,7 +74,7 @@ namespace Musimoji
         {
             if(DebugMessages)Debug.Log(string.Format(
                 // "Removing device ch:{0} player: {1} dev:'{2}'",
-                "Removing device ch:{0} dev:'{1}'",
+                "MinisNoteInputMapper.OnRemoveMidiDevice Removing device ch:{0} dev:'{1}'",
                 midiDevice.channel,
                 // DeviceChannelToPlayerId(midiDevice.channel),
                 midiDevice.description.product
@@ -87,11 +88,17 @@ namespace Musimoji
         private void CheckDevices()
         {
             var activeDevices = new List<MidiDevice>();
+            var deviceIds = new List<string>();
             foreach (var midiDevice in currentDevices)
             {
-                if(midiDevice is {enabled: true}) activeDevices.Add(midiDevice);
+                if (midiDevice is {enabled: true})
+                {
+                    activeDevices.Add(midiDevice);
+                    deviceIds.Add(midiDevice.shortDisplayName);
+                }
             }
             currentDevices = activeDevices;
+            this.deviceIds = deviceIds.ToArray();
         }
 
         private int DeviceChannelToPlayerId(int channel)
@@ -104,6 +111,16 @@ namespace Musimoji
             return -1;
         }
 
+        private int DeviceIdToPlayer(int deviceId)
+        {
+            for (var id = 0; id < currentDevices.Count; id++)
+            {
+                var device = currentDevices[id];
+                if (device.deviceId == deviceId) return id;
+            }
+            return -1;
+        }
+
         private void OnWillNoteOn(MidiNoteControl note, float velocity)
         {
             var channel = -1;
@@ -112,7 +129,7 @@ namespace Musimoji
                 return;
             }
             channel = midiDevice.channel;
-            // var playerId = DeviceChannelToPlayerId(channel);
+            var playerId = DeviceIdToPlayer(note.device.deviceId);
             // Note that you can't use note.velocity because the state
             // hasn't been updated yet (as this is "will" event). The note
             // object is only useful to specify the target note (note
@@ -120,15 +137,15 @@ namespace Musimoji
             // argument as an input note velocity.
             if(DebugMessages)Debug.Log(string.Format(
                 // "Note On #{0} ({1}) vel:{2:0.00} ch:{3} player: {4} dev:'{5}'",
-                "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}'",
+                "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}' pl:{5}",
                 note.noteNumber,
                 note.shortDisplayName,
                 velocity,
                 channel,
-                // playerId,
-                note.device.description.product
+                note.device.deviceId,
+                playerId
             ));
-            OnNoteDown?.Invoke(channel, (Note)note.noteNumber, velocity);
+            OnNoteDown?.Invoke(playerId, (Note)note.noteNumber, velocity);
         }
 
         private void OnWillNoteOff(MidiNoteControl note)
@@ -139,17 +156,18 @@ namespace Musimoji
                 return;
             }
             channel = midiDevice.channel;
+            var playerId = DeviceIdToPlayer(note.device.deviceId);
             // var playerId = DeviceChannelToPlayerId(channel);
             if(DebugMessages)Debug.Log(string.Format(
                 // "Note Off #{0} ({1}) ch:{2} player:{3} dev:'{4}'",
-                "Note Off #{0} ({1}) ch:{2} dev:'{3}'",
+                "Note Off #{0} ({1}) ch:{2} dev:'{3}' pl:{4}",
                 note.noteNumber,
                 note.shortDisplayName,
                 channel,
-                // playerId,
-                note.device.description.product
+                note.device.deviceId,
+                playerId
             ));
-            OnNoteUp?.Invoke(channel, (Note)note.noteNumber);
+            OnNoteUp?.Invoke(note.device.deviceId, (Note)note.noteNumber);
         }
     }
 }

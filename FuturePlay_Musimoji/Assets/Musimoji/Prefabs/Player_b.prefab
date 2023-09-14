@@ -1297,7 +1297,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1305,22 +1305,22 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
-        key6: {r: 0, g: 0, b: 0, a: 0}
-        key7: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.7843138, b: 0, a: 1}
+        key1: {r: 0, g: 0.7843138, b: 0, a: 1}
+        key2: {r: 0, g: 0.7843138, b: 0.5019608, a: 0}
+        key3: {r: 0, g: 0.7843138, b: 1, a: 0}
+        key4: {r: 0, g: 0.5019608, b: 1, a: 0}
+        key5: {r: 0.5019608, g: 0.5019608, b: 1, a: 0}
+        key6: {r: 0.86274517, g: 0, b: 0, a: 0}
+        key7: {r: 1, g: 0.5019608, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
-        ctime4: 0
-        ctime5: 0
-        ctime6: 0
-        ctime7: 0
+        ctime1: 9358
+        ctime2: 18717
+        ctime3: 28075
+        ctime4: 37434
+        ctime5: 46792
+        ctime6: 56150
+        ctime7: 65535
         atime0: 0
         atime1: 65535
         atime2: 0
@@ -1330,7 +1330,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 8
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -4821,6 +4821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7328528331732244508}
+  - component: {fileID: 957328839}
   m_Layer: 0
   m_Name: effects
   m_TagString: Untagged
@@ -4848,6 +4849,36 @@ Transform:
   m_Father: {fileID: 7328528333365532596}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &957328839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328528331732244499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aade468c45ee4424bb7a0f6b2ad4f631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugLevel: 0
+  playerManager: {fileID: 0}
+  playParticleSystem: {fileID: 7328528332960863856}
+  expressParticleSystem: {fileID: 7328528332245575877}
+  repressParticleSystems:
+  - {fileID: 7328528332282716334}
+  - {fileID: 7328528332312755906}
+  - {fileID: 7328528331732035545}
+  emojiVfxColors:
+  - {r: 0.23584908, g: 0.22434051, b: 0.20803669, a: 1}
+  - {r: 1, g: 0.7843138, b: 0, a: 1}
+  - {r: 0, g: 0.7843138, b: 0, a: 1}
+  - {r: 0, g: 0.7843138, b: 0.5019608, a: 1}
+  - {r: 0, g: 0.7843138, b: 1, a: 1}
+  - {r: 0, g: 0.5019608, b: 1, a: 1}
+  - {r: 0.5019608, g: 0.5019608, b: 1, a: 1}
+  - {r: 0.86274517, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.5019608, b: 0, a: 1}
 --- !u!1 &7328528332009733263
 GameObject:
   m_ObjectHideFlags: 0
@@ -4919,7 +4950,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1597035833
-  m_SortingLayer: 3
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 21c3221ca3e9f4a32bba09bbc3014e28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -11041,7 +11072,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -11049,22 +11080,22 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
-        key6: {r: 0, g: 0, b: 0, a: 0}
-        key7: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.7843138, b: 0, a: 1}
+        key1: {r: 0, g: 0.7843138, b: 0, a: 1}
+        key2: {r: 0, g: 0.7843138, b: 0.5019608, a: 0}
+        key3: {r: 0, g: 0.7843138, b: 1, a: 0}
+        key4: {r: 0, g: 0.5019608, b: 1, a: 0}
+        key5: {r: 0.5019608, g: 0.5019608, b: 1, a: 0}
+        key6: {r: 0.86274517, g: 0, b: 0, a: 0}
+        key7: {r: 1, g: 0.5019608, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
-        ctime4: 0
-        ctime5: 0
-        ctime6: 0
-        ctime7: 0
+        ctime1: 9358
+        ctime2: 18717
+        ctime3: 28075
+        ctime4: 37434
+        ctime5: 46792
+        ctime6: 56150
+        ctime7: 65535
         atime0: 0
         atime1: 65535
         atime2: 0
@@ -11074,7 +11105,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 8
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -15853,7 +15884,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -15861,22 +15892,22 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
-        key6: {r: 0, g: 0, b: 0, a: 0}
-        key7: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.7843138, b: 0, a: 1}
+        key1: {r: 0, g: 0.7843138, b: 0, a: 1}
+        key2: {r: 0, g: 0.7843138, b: 0.5019608, a: 0}
+        key3: {r: 0, g: 0.7843138, b: 1, a: 0}
+        key4: {r: 0, g: 0.5019608, b: 1, a: 0}
+        key5: {r: 0.5019608, g: 0.5019608, b: 1, a: 0}
+        key6: {r: 0.86274517, g: 0, b: 0, a: 0}
+        key7: {r: 1, g: 0.5019608, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
-        ctime4: 0
-        ctime5: 0
-        ctime6: 0
-        ctime7: 0
+        ctime1: 9358
+        ctime2: 18717
+        ctime3: 28075
+        ctime4: 37434
+        ctime5: 46792
+        ctime6: 56150
+        ctime7: 65535
         atime0: 0
         atime1: 65535
         atime2: 0
@@ -15886,7 +15917,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 8
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -19439,7 +19470,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1597035833
-  m_SortingLayer: 3
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 21c3221ca3e9f4a32bba09bbc3014e28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -24451,7 +24482,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1597035833
-  m_SortingLayer: 3
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cd4e484041da34dc9ac3a9135f3162ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -24622,7 +24653,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1597035833
-  m_SortingLayer: 3
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cd4e484041da34dc9ac3a9135f3162ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -24645,7 +24676,7 @@ PrefabInstance:
     - target: {fileID: 764321276340780983, guid: 9c9a2de54909b44b0adda794f21ad547,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 764321276340780983, guid: 9c9a2de54909b44b0adda794f21ad547,
         type: 3}
@@ -24720,7 +24751,7 @@ PrefabInstance:
     - target: {fileID: 764321276900241961, guid: 9c9a2de54909b44b0adda794f21ad547,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 764321276900241961, guid: 9c9a2de54909b44b0adda794f21ad547,
         type: 3}
@@ -24751,7 +24782,7 @@ PrefabInstance:
     - target: {fileID: 804343643190873066, guid: 69324594b70944f19a311f5aab9c350d,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 804343643190873066, guid: 69324594b70944f19a311f5aab9c350d,
         type: 3}
@@ -24761,7 +24792,7 @@ PrefabInstance:
     - target: {fileID: 804343643416982774, guid: 69324594b70944f19a311f5aab9c350d,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 804343643416982774, guid: 69324594b70944f19a311f5aab9c350d,
         type: 3}
@@ -24922,7 +24953,7 @@ PrefabInstance:
     - target: {fileID: 8009004525683840840, guid: 1f881317968d74835883bb3d87e0294c,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8009004525683840840, guid: 1f881317968d74835883bb3d87e0294c,
         type: 3}
@@ -24932,7 +24963,7 @@ PrefabInstance:
     - target: {fileID: 8009004525842383493, guid: 1f881317968d74835883bb3d87e0294c,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8009004525842383493, guid: 1f881317968d74835883bb3d87e0294c,
         type: 3}
@@ -24963,7 +24994,7 @@ PrefabInstance:
     - target: {fileID: 2020546274028978447, guid: 80a741fd945674d37bfbb5ce7c71959a,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2020546274028978447, guid: 80a741fd945674d37bfbb5ce7c71959a,
         type: 3}
@@ -25038,7 +25069,7 @@ PrefabInstance:
     - target: {fileID: 2020546275229703952, guid: 80a741fd945674d37bfbb5ce7c71959a,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2020546275229703952, guid: 80a741fd945674d37bfbb5ce7c71959a,
         type: 3}
@@ -25069,7 +25100,7 @@ PrefabInstance:
     - target: {fileID: 59013082896550552, guid: e79947b4084c649ddbc6dc65cc1cea49,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 59013082896550552, guid: e79947b4084c649ddbc6dc65cc1cea49,
         type: 3}
@@ -25079,7 +25110,7 @@ PrefabInstance:
     - target: {fileID: 59013083694790233, guid: e79947b4084c649ddbc6dc65cc1cea49,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 59013083694790233, guid: e79947b4084c649ddbc6dc65cc1cea49,
         type: 3}
@@ -25175,7 +25206,7 @@ PrefabInstance:
     - target: {fileID: 7721335505220210270, guid: 93bc2c17fd810491289c1b1eb5bd3a6e,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7721335505220210270, guid: 93bc2c17fd810491289c1b1eb5bd3a6e,
         type: 3}
@@ -25185,7 +25216,7 @@ PrefabInstance:
     - target: {fileID: 7721335505296225500, guid: 93bc2c17fd810491289c1b1eb5bd3a6e,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7721335505296225500, guid: 93bc2c17fd810491289c1b1eb5bd3a6e,
         type: 3}
@@ -25281,7 +25312,7 @@ PrefabInstance:
     - target: {fileID: 3194766229781678384, guid: 2a11500aa7ce44a98b293929560ff2ec,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3194766229781678384, guid: 2a11500aa7ce44a98b293929560ff2ec,
         type: 3}
@@ -25356,7 +25387,7 @@ PrefabInstance:
     - target: {fileID: 3194766230386445913, guid: 2a11500aa7ce44a98b293929560ff2ec,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3194766230386445913, guid: 2a11500aa7ce44a98b293929560ff2ec,
         type: 3}
@@ -25387,7 +25418,7 @@ PrefabInstance:
     - target: {fileID: 6355091599554239975, guid: f1fb8687bacc648ef969456bb5c930fd,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6355091599554239975, guid: f1fb8687bacc648ef969456bb5c930fd,
         type: 3}
@@ -25462,7 +25493,7 @@ PrefabInstance:
     - target: {fileID: 6355091601218674437, guid: f1fb8687bacc648ef969456bb5c930fd,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6355091601218674437, guid: f1fb8687bacc648ef969456bb5c930fd,
         type: 3}

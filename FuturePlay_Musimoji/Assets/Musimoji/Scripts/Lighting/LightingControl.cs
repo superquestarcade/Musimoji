@@ -18,6 +18,7 @@ namespace Musimoji.Scripts.Lighting
 
         private void Start()
         {
+            if (!manager.LightingEnabled) return;
             attractLoopManager.OnStartAttract.AddListener(OnAttract);
             manager.OnStartGame.AddListener(OnStartGame);
             manager.OnEmojiHit.AddListener(OnEmojiHit);
